@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaper Store | Los mejores dispositivos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Valencia Vapers</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="banner">
+            <h2>Vapear es un arte, elige el mejor equipo</h2>
+        </section>
+
+        <section class="buscador-container">
+             <input type="text" id="buscador" placeholder="Busca tu vaper favorito...">
+        </section>
+
+        <section id="contenedor-productos" class="productos"></section>
+        
+        <section id="contacto" class="contacto">
+            <h2>Nuestras Tiendas en Valencia</h2>
+            <div class="contenedor-mapas">
+                <div class="tienda">
+                    <h3>Paiporta</h3>
+                    <p>Calle San Antonio 20, Paiporta</p>
+                    <div class="mapa">
+                        <iframe src="http://googleusercontent.com/maps.google.com/5" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="tienda">
+                    <h3>Torrente</h3>
+                    <p>Calle Pintor Renau 44, Torrente</p>
+                    <div class="mapa">
+                        <iframe src="http://googleusercontent.com/maps.google.com/6" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="carrito-flotante">
+        <h3>Tu Cesta 🛒</h3>
+        <ul id="lista-cesta"></ul>
+        <p>Total: <span id="total-precio">0</span>€</p>
+        <button id="enviar-whatsapp-cesta" class="boton-compra">Pedir por WhatsApp</button>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 Valencia Vapers - Todos los derechos reservados.</p>
+            <p>Prohibida la venta a menores de 18 años.</p>
+            <div class="redes">
+                <a href="#">Instagram</a> | <a href="#">Facebook</a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/34607280031?text=Hola!%20Tengo%20una%20duda" class="whatsapp-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
+
+    <script src="productos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
