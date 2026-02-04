@@ -156,6 +156,132 @@ nav ul li a {
     outline: none;
 }
 
+/* 8. ESTILO DE BOTONES (PRODUCTOS Y WHATSAPP) */
+.tarjeta-vaper {
+    background: #16213e;
+    border: 1px solid var(--rosa-neon);
+    border-radius: 15px;
+    margin: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.3s;
+}
+
+/* Botón de Añadir a la Cesta (Turquesa Neón) */
+.tarjeta-vaper button, .btn-agregar {
+    background-color: var(--turquesa);
+    color: #1a1a2e;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 213, 0.3);
+}
+
+/* Efecto al pasar el ratón por el botón turquesa */
+.tarjeta-vaper button:hover {
+    background-color: white;
+    box-shadow: 0 0 20px var(--turquesa);
+    transform: scale(1.02);
+}
+
+/* Estilo para el botón de WhatsApp dentro de la tarjeta */
+/* Si en tu HTML este botón tiene la clase 'btn-whatsapp', usa este código: */
+.btn-whatsapp-pedido {
+    background-color: #25d366 !important;
+    color: white !important;
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    box-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp-pedido:hover {
+    background-color: #128c7e !important;
+    box-shadow: 0 0 20px #25d366;
+}
+
+/* 9. ESTILO DEL CARRITO FLOTANTE */
+#carrito-flotante {
+    position: fixed;
+    bottom: 90px; /* Para que no tape el botón de WhatsApp flotante */
+    right: 20px;
+    width: 280px;
+    background: rgba(26, 26, 46, 0.95); /* Fondo oscuro con transparencia */
+    border: 2px solid var(--naranja-sol);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
+    z-index: 999;
+    backdrop-filter: blur(10px); /* Efecto cristal esmerilado */
+}
+
+#carrito-flotante h3 {
+    margin-top: 0;
+    color: var(--naranja-sol);
+    font-size: 1.2rem;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#lista-cesta {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto; /* Si hay muchos productos, sale scroll */
+    margin-bottom: 15px;
+}
+
+#lista-cesta li {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#carrito-flotante p {
+    font-weight: bold;
+    font-size: 1.1rem;
+    text-align: right;
+    color: var(--turquesa);
+}
+
+/* El botón de enviar dentro del carrito */
+.boton-compra {
+    background-color: var(--turquesa) !important;
+    color: #1a1a2e !important;
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.boton-compra:hover {
+    background-color: white !important;
+    box-shadow: 0 0 15px var(--turquesa);
+}
+
 /* 7. REGLAS PARA MÓVIL (DEBEN IR AL FINAL) */
 @media (max-width: 600px) {
     header h1 { font-size: 1.3rem; }
