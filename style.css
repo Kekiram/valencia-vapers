@@ -99,6 +99,29 @@ nav ul li a {
     text-align: center;
 }
 
+.banner-content {
+    display: flex;
+    flex-direction: column; /* Esto pone el texto uno debajo del otro */
+    gap: 10px; /* Espacio entre el título y el subtítulo */
+}
+
+.subtitulo-banner {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-transform: italic;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+/* Ajuste para que en móvil no se vea gigante */
+@media (max-width: 600px) {
+    .subtitulo-banner {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+}
+
 /* 5. PRODUCTOS Y MAPAS */
 .productos {
     display: flex;
