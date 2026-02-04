@@ -300,17 +300,42 @@ footer {
 /* Cuando la pantalla sea menor a 768px (móviles y tablets) */
 @media (max-width: 600px) {
     header {
-        align-items: center; /* Centra el logo */
-        min-height: auto;
+        position: relative;
+        padding: 15px 10px;
+        min-height: auto; /* Quitamos la altura fija */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra logo y nombre */
     }
-    
+
+    .header-content {
+        flex-direction: column; /* Logo arriba, nombre abajo */
+        gap: 5px;
+        margin-bottom: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5rem; /* Letra un poco más pequeña */
+        text-align: center;
+    }
+
+    .logo {
+        height: 40px; /* Logo más pequeño */
+    }
+
     nav {
-        position: static; /* Quita el posicionamiento de la esquina */
-        margin-top: 10px;
+        position: static; /* Quitamos lo de "abajo a la derecha" */
+        width: 100%;
+    }
+
+    nav ul {
+        justify-content: center; /* Centra los botones del menú */
+        gap: 10px;
+        flex-wrap: wrap; /* Si no caben, que bajen a la siguiente línea */
     }
     
-    nav ul {
-        justify-content: center;
+    nav ul li a {
+        font-size: 0.8rem;
     }
 }
     .productos {
@@ -367,5 +392,29 @@ img {
     }
     .whatsapp-float img {
         width: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .banner {
+        height: 120px; /* Más pequeño aún en móvil */
+    }
+
+    .banner h2 {
+        font-size: 1.2rem;
+        padding: 0 10px;
+    }
+
+    /* Mapas adaptables */
+    .mapa-container {
+        height: 250px; /* Menos alto en el móvil para que no ocupe toda la pantalla */
+        margin: 10px 0;
+    }
+
+    /* Asegurar que las tarjetas de productos no se vean gigantes */
+    .contenedor-productos {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 10px;
+        padding: 10px;
     }
 }
