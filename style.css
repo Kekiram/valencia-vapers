@@ -2,39 +2,126 @@ html {
     scroll-behavior: smooth; /* ¡Esto hace que la web se deslice con elegancia! */
 }
 
+:root {
+    --naranja-sol: #ff8c00;
+    --rosa-neon: #ff007f;
+    --turquesa: #00ffd5;
+    --fondo-oscuro: #1a1a2e; /* Azul muy oscuro para que resalten los neones */
+    --texto: #ffffff;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background-color: #1a1a1a; /* Fondo oscuro */
+    background-color: var(--fondo-oscuro);
+    color: var(--texto);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. Header con degradado "Atardecer" */
+header {
+    position: relative; /* Esto es clave para que el menú no se escape del header */
+    padding: 15px 20px;
+    min-height: 80px;   /* Le damos un poco de altura para que el menú tenga sitio abajo */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* El logo y el título se quedan a la izquierda */
+    background: linear-gradient(135deg, var(--naranja-sol), var(--rosa-neon));
+    padding: 5px 20px;
+    border-bottom: 3px solid var(--turquesa);
+    box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
+}
+/* 2. Ajuste del Título */
+header h1 {
+    font-family: 'Pacifico', cursive; /* Fuente redondeada y manual */
+    margin: 0;
+    font-size: 2.2rem; /* Al ser manuscrita, necesita ser un poco más grande */
+    color: #fff;
+    text-transform: none; /* No queremos mayúsculas rígidas */
+    
+    /* Efecto de degradado y brillo suave */
+    text-shadow: 
+        2px 2px 0px var(--rosa-neon), 
+        4px 4px 10px rgba(0, 255, 213, 0.5);
+    
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+/* 3. El menú de navegación (Inicio, Productos...) */
+nav ul {
+    position: absolute;
+    bottom: 10px;  /* Distancia desde el borde inferior */
+    right: 20px;   /* Distancia desde el borde derecho */
+    margin: 0;
+    padding: 5px 0;
+    display: flex;
+    gap: 15px;
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
     color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+nav ul li a:hover {
+    color: var(--turquesa); /* El color del logo que configuramos antes */
+    text-shadow: 0 0 5px var(--turquesa);
+}
+
+.banner {
+    height: 100px; /* Antes era de 300px, ahora es la mitad */
+    margin-top: 0; /* Aseguramos que esté pegado al header */
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                url('img/'); /* Tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 2px solid var(--rosa-neon);
+}
+
+.banner h2 {
+    font-size: 1.5rem; /* Texto un poco más pequeño para que quepa bien */
+    color: var(--turquesa);
+    text-shadow: 2px 2px 0px var(--rosa-neon);
     margin: 0;
 }
 
-header {
-    background-color: #333;
-    padding: 20px;
+/* 1. Contenedor del Logo y Título */
+.header-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    /* ESTO ES LO NUEVO */
-    position: sticky;      /* Hace que se quede pegado */
-    top: 0;               /* Se pega al borde superior */
-    z-index: 1000;        /* Asegura que pase por encima de las fotos al hacer scroll */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5); /* Le da una sombrita para que resalte */
+    align-items: center;    /* Alinea el logo y el texto verticalmente al centro */
+    justify-content: center; /* Centra todo el conjunto en el medio del header */
+    width: 100%;            /* Ocupa todo el ancho para poder centrarse */
+    gap: 15px;              /* Espacio entre el logo y el nombre */
+    padding-top: 5px;       /* Un poco de aire arriba */
 }
 
-nav ul {
-    list-style: none;
-    display: flex;
+.logo {
+    height: 150px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    transition: transform 0.3s;
 }
 
-nav ul li {
-    margin-left: 20px;
+.logo:hover {
+    transform: rotate(5deg) scale(1.1); /* Un pequeño juego al pasar el ratón */
 }
 
-nav a {
-    color: #00d4ff; /* Azul neón */
-    text-decoration: none;
+/* Ajuste para móviles */
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column; /* Logo arriba, nombre abajo en móviles */
+        gap: 5px;
+    }
+    .logo {
+        height: 50px;
+    }
 }
 
 .productos {
@@ -43,12 +130,17 @@ nav a {
     padding: 50px;
 }
 
+/* 4. Tarjetas de Productos */
 .tarjeta-vaper {
-    background-color: #262626;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    border: 1px solid #444;
+    background: #16213e;
+    border: 1px solid var(--rosa-neon);
+    border-radius: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.tarjeta-vaper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px var(--rosa-neon);
 }
 
 button {
@@ -60,37 +152,26 @@ button {
     font-weight: bold;
 }
 
-.boton-compra {
-    display: inline-block;
-    background-color: #25d366; /* verde WatsApp */
-    color: black;
-    padding: 10px 20px;
-    text-decoration: none;
+/* 5. Botones Turquesa (como el logo) */
+.btn-agregar, .boton-compra {
+    background-color: var(--turquesa);
+    color: #1a1a2e;
     font-weight: bold;
-    border-radius: 5px;
-    margin-top: 10px;
+    border: none;
+    text-transform: uppercase;
     transition: 0.3s;
 }
 
-.boton-compra:hover {
-background-color: #128c7e;
-color: white;
-transform: scale(1.05); /* Se hace un poco mas grande al pasar por el boton */
+.btn-agregar:hover {
+    background-color: white;
+    box-shadow: 0 0 20px var(--turquesa);
 }
-
+/* 6. El Carrito Flotante */
 #carrito-flotante {
-    position: fixed;
-    bottom: 110px; /* Encima del botón de WhatsApp */
-    right: 40px;
-    background: #333;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #00d4ff;
-    width: 250px;
-    color: white;
-    z-index: 999;
+    background: rgba(26, 26, 46, 0.9);
+    border: 2px solid var(--naranja-sol);
+    backdrop-filter: blur(5px);
 }
-
 #lista-cesta {
     list-style: none;
     padding: 0;
@@ -111,20 +192,16 @@ transform: scale(1.05); /* Se hace un poco mas grande al pasar por el boton */
     padding: 20px;
 }
 
+/* 3. El Buscador estilo Neón */
 #buscador {
-    width: 80%;
-    max-width: 500px;
-    padding: 12px 20px;
-    border-radius: 25px;
-    border: 2px solid #00d4ff;
-    background: #222;
+    border: 2px solid var(--turquesa);
+    background: #0f3460;
     color: white;
-    font-size: 1rem;
-    outline: none;
+    box-shadow: 0 0 10px var(--turquesa);
 }
 
-#buscador:focus {
-    box-shadow: 0 0 10px #00d4ff;
+#buscador::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .contacto {
@@ -180,23 +257,60 @@ footer {
     text-decoration: underline;
 }
 
+.modal-edad {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95); /* Casi opaco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999; /* Por encima de TODO */
+}
+
+.contenido-edad {
+    background: #222;
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid #00d4ff;
+    text-align: center;
+    color: white;
+    max-width: 400px;
+}
+
+.botones-edad {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.botones-edad button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+}
+
+.botones-edad button:first-child { background: #25d366; color: white; }
+.botones-edad button:last-child { background: #ff4b2b; color: white; }
+
 /* Cuando la pantalla sea menor a 768px (móviles y tablets) */
-@media (max-width: 768px) {
-    
+@media (max-width: 600px) {
     header {
-        flex-direction: column; /* Pone el título arriba y el menú abajo */
-        text-align: center;
+        align-items: center; /* Centra el logo */
+        min-height: auto;
     }
-
+    
+    nav {
+        position: static; /* Quita el posicionamiento de la esquina */
+        margin-top: 10px;
+    }
+    
     nav ul {
-        padding: 0;
-        margin-top: 20px;
+        justify-content: center;
     }
-
-    nav ul li {
-        margin: 0 10px; /* Espaciado más pequeño entre links */
-    }
-
+}
     .productos {
         flex-direction: column; /* ¡IMPORTANTE! Los productos se ponen uno debajo de otro */
         align-items: center;

@@ -5,10 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vaper Store | Los mejores dispositivos</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <div id="aviso-edad" class="modal-edad">
+    <div class="contenido-edad">
+        <h2>🔞 Acceso Restringido</h2>
+        <p>Debes ser mayor de 18 años para entrar en Valencia Vapers. Al entrar, confirmas que eres mayor de 18 años y aceptas el uso de cookies técnicas para la gestión de tu sesión. ¿Confirmas que eres mayor de edad?</p>
+        <div class="botones-edad">
+            <button onclick="confirmarEdad()">Sí, soy mayor de edad</button>
+            <button onclick="salirTienda()">No, soy menor</button>
+        </div>
+    </div>
+</div>
+
     <header>
+        <div class="header-content">
+        <img src="img/logo.png" alt="Logo Valencia Vapers" class="logo">
+      
+    </div>
         <h1>Valencia Vapers</h1>
         <nav>
             <ul>
@@ -21,7 +37,7 @@
 
     <main>
         <section class="banner">
-            <h2>Vapear es un arte, elige el mejor equipo</h2>
+            <h2>TU TIENDA DE VAPEO</h2>
         </section>
 
         <section class="buscador-container">
