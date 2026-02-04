@@ -31,18 +31,20 @@ header {
 }
 /* 2. Ajuste del Título */
 header h1 {
-    font-family: 'Pacifico', cursive; /* Fuente redondeada y manual */
+    font-family: 'Orbitron', sans-serif; /* La fuente futurista */
     margin: 0;
-    font-size: 2.2rem; /* Al ser manuscrita, necesita ser un poco más grande */
+    font-size: 1.8rem;
     color: #fff;
-    text-transform: none; /* No queremos mayúsculas rígidas */
+    text-transform: uppercase;
+    letter-spacing: 2px;
     
-    /* Efecto de degradado y brillo suave */
+    /* Efecto de brillo Neón */
     text-shadow: 
-        2px 2px 0px var(--rosa-neon), 
-        4px 4px 10px rgba(0, 255, 213, 0.5);
+        0 0 5px var(--turquesa),
+        0 0 10px var(--turquesa),
+        0 0 20px var(--turquesa);
     
-    line-height: 1.2;
+    line-height: 1;
     white-space: nowrap;
 }
 
