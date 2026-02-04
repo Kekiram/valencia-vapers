@@ -1,12 +1,13 @@
+/* 1. CONFIGURACIÓN GENERAL */
 html {
-    scroll-behavior: smooth; /* ¡Esto hace que la web se deslice con elegancia! */
+    scroll-behavior: smooth;
 }
 
 :root {
     --naranja-sol: #ff8c00;
     --rosa-neon: #ff007f;
     --turquesa: #00ffd5;
-    --fondo-oscuro: #1a1a2e; /* Azul muy oscuro para que resalten los neones */
+    --fondo-oscuro: #1a1a2e;
     --texto: #ffffff;
 }
 
@@ -14,48 +15,56 @@ body {
     background-color: var(--fondo-oscuro);
     color: var(--texto);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
 }
 
-/* 2. Header con degradado "Atardecer" */
+/* 2. HEADER (ZONA DEL LOGO) */
 header {
-    position: relative; /* Esto es clave para que el menú no se escape del header */
-    padding: 15px 20px;
-    min-height: 80px;   /* Le damos un poco de altura para que el menú tenga sitio abajo */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* El logo y el título se quedan a la izquierda */
+    position: relative;
     background: linear-gradient(135deg, var(--naranja-sol), var(--rosa-neon));
-    padding: 5px 20px;
+    padding: 10px 20px;
     border-bottom: 3px solid var(--turquesa);
     box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-/* 2. Ajuste del Título */
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+}
+
+.logo {
+    height: 90px; /* Ajustado para que no sea tan grande */
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+    transition: transform 0.3s;
+}
+
 header h1 {
-    font-family: 'Orbitron', sans-serif; /* La fuente futurista */
+    font-family: 'Orbitron', sans-serif;
     margin: 0;
     font-size: 1.8rem;
     color: #fff;
     text-transform: uppercase;
     letter-spacing: 2px;
-    
-    /* Efecto de brillo Neón */
-    text-shadow: 
-        0 0 5px var(--turquesa),
-        0 0 10px var(--turquesa),
-        0 0 20px var(--turquesa);
-    
-    line-height: 1;
-    white-space: nowrap;
+    text-shadow: 0 0 10px var(--turquesa);
 }
 
-/* 3. El menú de navegación (Inicio, Productos...) */
+/* 3. MENÚ DE NAVEGACIÓN */
+nav {
+    width: 100%;
+    margin-top: 10px;
+}
+
 nav ul {
-    position: absolute;
-    bottom: 10px;  /* Distancia desde el borde inferior */
-    right: 20px;   /* Distancia desde el borde derecho */
     margin: 0;
-    padding: 5px 0;
+    padding: 0;
     display: flex;
+    justify-content: center; /* Por defecto centrado, luego en PC lo movemos */
     gap: 15px;
     list-style: none;
 }
@@ -66,355 +75,99 @@ nav ul li a {
     font-size: 0.9rem;
     font-weight: bold;
     text-transform: uppercase;
-    transition: 0.3s;
-}
-nav ul li a:hover {
-    color: var(--turquesa); /* El color del logo que configuramos antes */
-    text-shadow: 0 0 5px var(--turquesa);
 }
 
+/* 4. BANNER (ANUNCIO) - AQUÍ ESTÁ EL ARREGLO DE LA IMAGEN */
 .banner {
-    height: 100px; /* Antes era de 300px, ahora es la mitad */
-    margin-top: 0; /* Aseguramos que esté pegado al header */
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                url('img/'); /* Tu imagen de fondo */
-    background-size: cover;
-    background-position: center;
+    width: 100%;
+    min-height: 150px; /* Le damos un poco más de altura */
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                url('img/logo.png'); /* O la imagen que uses de fondo */
+    background-size: cover;      /* Obliga a la imagen a cubrir todo el ancho */
+    background-position: center;  /* Centra el dibujo del atardecer */
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    padding: 10px;
-    border-bottom: 2px solid var(--rosa-neon);
 }
 
 .banner h2 {
-    font-size: 1.5rem; /* Texto un poco más pequeño para que quepa bien */
+    font-size: 1.4rem;
     color: var(--turquesa);
-    text-shadow: 2px 2px 0px var(--rosa-neon);
-    margin: 0;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 10px var(--rosa-neon);
+    padding: 0 20px;
+    text-align: center;
 }
 
-/* 1. Contenedor del Logo y Título */
-.header-content {
-    display: flex;
-    align-items: center;    /* Alinea el logo y el texto verticalmente al centro */
-    justify-content: center; /* Centra todo el conjunto en el medio del header */
-    width: 100%;            /* Ocupa todo el ancho para poder centrarse */
-    gap: 15px;              /* Espacio entre el logo y el nombre */
-    padding-top: 5px;       /* Un poco de aire arriba */
-}
-
-.logo {
-    height: 150px;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    transition: transform 0.3s;
-}
-
-.logo:hover {
-    transform: rotate(5deg) scale(1.1); /* Un pequeño juego al pasar el ratón */
-}
-
-/* Ajuste para móviles */
-@media (max-width: 600px) {
-    .header-content {
-        flex-direction: column; /* Logo arriba, nombre abajo en móviles */
-        gap: 5px;
-    }
-    .logo {
-        height: 50px;
-    }
-}
-
+/* 5. PRODUCTOS Y MAPAS */
 .productos {
     display: flex;
     justify-content: space-around;
-    padding: 50px;
-}
-
-/* 4. Tarjetas de Productos */
-.tarjeta-vaper {
-    background: #16213e;
-    border: 1px solid var(--rosa-neon);
-    border-radius: 15px;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.tarjeta-vaper:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 15px var(--rosa-neon);
-}
-
-button {
-    background-color: #00d4ff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-/* 5. Botones Turquesa (como el logo) */
-.btn-agregar, .boton-compra {
-    background-color: var(--turquesa);
-    color: #1a1a2e;
-    font-weight: bold;
-    border: none;
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-
-.btn-agregar:hover {
-    background-color: white;
-    box-shadow: 0 0 20px var(--turquesa);
-}
-/* 6. El Carrito Flotante */
-#carrito-flotante {
-    background: rgba(26, 26, 46, 0.9);
-    border: 2px solid var(--naranja-sol);
-    backdrop-filter: blur(5px);
-}
-#lista-cesta {
-    list-style: none;
-    padding: 0;
-    max-height: 150px;
-    overflow-y: auto;
-}
-
-#lista-cesta li {
-    font-size: 0.8rem;
-    border-bottom: 1px solid #444;
-    padding: 5px 0;
-    display: flex;
-    justify-content: space-between;
-}
-
-.buscador-container {
-    text-align: center;
+    flex-wrap: wrap;
     padding: 20px;
 }
 
-/* 3. El Buscador estilo Neón */
-#buscador {
-    border: 2px solid var(--turquesa);
-    background: #0f3460;
-    color: white;
-    box-shadow: 0 0 10px var(--turquesa);
-}
-
-#buscador::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.contacto {
-    padding: 60px 20px;
-    text-align: center;
-    background-color: #222; /* Un tono un poco distinto para separar secciones */
-}
-
-.contenedor-mapas {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap; /* Para que en móvil bajen una debajo de otra */
-    gap: 20px;
-    margin-top: 30px;
-}
-
-.tienda {
-    flex: 1; /* Hace que las dos tiendas midan lo mismo */
-    min-width: 300px; /* Evita que se encojan demasiado */
-    background: #333;
-    padding: 20px;
+.tarjeta-vaper img {
+    width: 100%;
+    height: auto;
     border-radius: 10px;
+    padding: 10px; /* Esto crea el marco para que no pegue al borde */
+    background-color: white; /* Opcional: mantiene el fondo blanco del producto limpio */
+}
+.mapa-container {
+    width: 100%;
+    height: 300px;
+    border: 2px solid var(--turquesa);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
 }
 
-.mapa {
-    margin-top: 15px;
-    border-radius: 8px;
-    overflow: hidden; /* Para que el mapa respete las esquinas redondeadas */
-    border: 2px solid #00d4ff; /* Borde neón para seguir el estilo */
-}
-
-footer {
-    background-color: #111;
-    color: #888;
-    text-align: center;
-    padding: 30px 20px;
-    margin-top: 50px;
-    border-top: 1px solid #333;
-    font-size: 0.9rem;
-}
-
-.footer-content p {
-    margin: 5px 0;
-}
-
-.redes a {
-    color: #00d4ff;
-    text-decoration: none;
-    margin: 0 10px;
-}
-
-.redes a:hover {
-    text-decoration: underline;
-}
-
-.modal-edad {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); /* Casi opaco */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999; /* Por encima de TODO */
-}
-
-.contenido-edad {
-    background: #222;
-    padding: 40px;
-    border-radius: 15px;
-    border: 2px solid #00d4ff;
-    text-align: center;
-    color: white;
-    max-width: 400px;
-}
-
-.botones-edad {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-}
-
-.botones-edad button {
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-    border: none;
-    font-weight: bold;
-}
-
-.botones-edad button:first-child { background: #25d366; color: white; }
-.botones-edad button:last-child { background: #ff4b2b; color: white; }
-
-/* Cuando la pantalla sea menor a 768px (móviles y tablets) */
-@media (max-width: 600px) {
-    header {
-        position: relative;
-        padding: 15px 10px;
-        min-height: auto; /* Quitamos la altura fija */
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Centra logo y nombre */
-    }
-
-    .header-content {
-        flex-direction: column; /* Logo arriba, nombre abajo */
-        gap: 5px;
-        margin-bottom: 15px;
-    }
-
-    header h1 {
-        font-size: 1.5rem; /* Letra un poco más pequeña */
-        text-align: center;
-    }
-
-    .logo {
-        height: 40px; /* Logo más pequeño */
-    }
-
-    nav {
-        position: static; /* Quitamos lo de "abajo a la derecha" */
-        width: 100%;
-    }
-
-    nav ul {
-        justify-content: center; /* Centra los botones del menú */
-        gap: 10px;
-        flex-wrap: wrap; /* Si no caben, que bajen a la siguiente línea */
-    }
-    
-    nav ul li a {
-        font-size: 0.8rem;
-    }
-}
-    .productos {
-        flex-direction: column; /* ¡IMPORTANTE! Los productos se ponen uno debajo de otro */
-        align-items: center;
-        padding: 20px;
-    }
-
-    .tarjeta-vaper {
-        width: 90%; /* La tarjeta ocupa casi todo el ancho del móvil */
-        margin-bottom: 20px;
-    }
-}
-img {
-    max-width: 100%; /* La imagen nunca será más ancha que su contenedor */
-    height: auto;    /* Mantiene la proporción para que no se vea aplastada */
-}
-
+/* 6. WHATSAPP FLOTANTE */
 .whatsapp-float {
     position: fixed;
     width: 60px;
     height: 60px;
-    bottom: 40px;      /* Distancia desde abajo */
-    right: 40px;       /* Distancia desde la derecha */
+    bottom: 20px;
+    right: 20px;
     background-color: #25d366;
-    color: #FFF;
     border-radius: 50px;
-    text-align: center;
-    font-size: 30px;
-    box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-    z-index: 10000;    /* Para que siempre esté por encima de todo */
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
+    z-index: 1000;
+}
+.buscador-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--fondo-oscuro);
 }
 
-.whatsapp-float img {
-    width: 35px;       /* Tamaño del logo dentro del círculo */
+#buscador {
+    width: 90%; /* Ocupa casi todo el ancho en móvil */
+    max-width: 400px;
+    padding: 12px;
+    border: 2px solid var(--turquesa);
+    border-radius: 25px; /* Bordes redondeados queda mejor */
+    background: #0f3460;
+    color: white;
+    box-shadow: 0 0 15px var(--turquesa);
+    outline: none;
 }
 
-.whatsapp-float:hover {
-    background-color: #128c7e;
-    transform: scale(1.1); /* Efecto de aumento al pasar el ratón */
-}
-
-/* Ajuste para móviles: un poco más pequeño para no estorbar */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        width: 50px;
-        height: 50px;
-        bottom: 20px;
-        right: 20px;
-    }
-    .whatsapp-float img {
-        width: 30px;
-    }
-}
-
+/* 7. REGLAS PARA MÓVIL (DEBEN IR AL FINAL) */
 @media (max-width: 600px) {
-    .banner {
-        height: 120px; /* Más pequeño aún en móvil */
-    }
+    header h1 { font-size: 1.3rem; }
+    .logo { height: 45px; }
+    .banner { height: 120px; }
+    .banner h2 { font-size: 1.1rem; }
+    nav ul { gap: 8px; }
+    nav ul li a { font-size: 0.75rem; }
+}
 
-    .banner h2 {
-        font-size: 1.2rem;
-        padding: 0 10px;
-    }
-
-    /* Mapas adaptables */
-    .mapa-container {
-        height: 250px; /* Menos alto en el móvil para que no ocupe toda la pantalla */
-        margin: 10px 0;
-    }
-
-    /* Asegurar que las tarjetas de productos no se vean gigantes */
-    .contenedor-productos {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 10px;
-        padding: 10px;
-    }
+/* Regla para PC: situar el menú abajo a la derecha */
+@media (min-width: 800px) {
+    header { min-height: 100px; align-items: flex-start; }
+    nav { position: absolute; bottom: 10px; right: 20px; width: auto; }
 }
