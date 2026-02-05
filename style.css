@@ -88,6 +88,34 @@ nav ul li a {
 }
 .tarjeta-vaper img { width: 100%; border-radius: 10px; background: white; }
 
+.titulo-seccion {
+    text-align: center;
+    color: var(--turquesa);
+    font-family: 'Orbitron', sans-serif;
+    margin: 40px 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Efecto especial para las tarjetas de novedades */
+.especial-novedad {
+    border: 1px solid #00ffd5;
+    box-shadow: 0 0 10px rgba(0, 255, 213, 0.2);
+}
+
+/* Efecto especial para los top ventas */
+.especial-top {
+    border: 1px solid #ffcc00;
+    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
+}
+
+.productos-especiales {
+    background: rgba(255, 255, 255, 0.02);
+    padding: 20px 0;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
 /* 5. BOTONES */
 .btn-agregar {
     background: var(--turquesa);
