@@ -106,12 +106,14 @@ nav ul li a {
 }
 
 .subtitulo-banner {
-    color: #ffffff;
+    color: var(--turquesa); /* O blanco si prefieres */
     font-size: 1.1rem;
-    font-weight: bold;
-    text-transform: italic;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    /* Un brillo suave para que sea legible sobre la imagen */
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 5px var(--turquesa);
+    margin: 5px 0 0 0;
 }
 
 /* Ajuste para que en móvil no se vea gigante */
@@ -303,6 +305,46 @@ nav ul li a {
 .boton-compra:hover {
     background-color: white !important;
     box-shadow: 0 0 15px var(--turquesa);
+}
+
+/* Estilo del icono de la cesta */
+#icono-carrito {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--rosa-neon);
+    padding: 10px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 0 15px var(--rosa-neon);
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#contador-carrito {
+    background: white;
+    color: var(--rosa-neon);
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+/* Modificamos el carrito para que empiece oculto */
+#carrito-flotante {
+    display: none; /* Se ocultará al inicio */
+    position: fixed;
+    top: 80px; /* Aparece debajo del icono */
+    right: 20px;
+    /* ... el resto de tu estilo de carrito se mantiene ... */
+}
+
+/* Clase para mostrarlo con JavaScript */
+#carrito-flotante.activo {
+    display: block !important;
 }
 
 /* 7. REGLAS PARA MÓVIL (DEBEN IR AL FINAL) */

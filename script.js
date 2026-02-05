@@ -79,6 +79,20 @@ document.addEventListener('DOMContentLoaded', () => {
         totalPrecio.innerText = total;
     }
 
+    function toggleCarrito() {
+    const carrito = document.getElementById('carrito-flotante');
+    carrito.classList.toggle('activo');
+}
+
+// Opcional: Cerrar el carrito si el usuario hace clic fuera de él
+window.onclick = function(event) {
+    const carrito = document.getElementById('carrito-flotante');
+    const icono = document.getElementById('icono-carrito');
+    if (!carrito.contains(event.target) && !icono.contains(event.target)) {
+        carrito.classList.remove('activo');
+    }
+}
+
     // Enviar WhatsApp
     const btnWhatsApp = document.getElementById('enviar-whatsapp-cesta');
     if(btnWhatsApp) {
