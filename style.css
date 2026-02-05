@@ -1,8 +1,5 @@
-/* 1. CONFIGURACIÓN GENERAL */
-html {
-    scroll-behavior: smooth;
-}
-
+/* 1. BASE */
+html { scroll-behavior: smooth; }
 :root {
     --naranja-sol: #ff8c00;
     --rosa-neon: #ff007f;
@@ -10,355 +7,280 @@ html {
     --fondo-oscuro: #1a1a2e;
     --texto: #ffffff;
 }
-
 body {
     background-color: var(--fondo-oscuro);
     color: var(--texto);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
 }
 
-/* 2. HEADER (ZONA DEL LOGO) */
+/* 2. HEADER Y NAVEGACIÓN */
 header {
-    position: relative;
     background: linear-gradient(135deg, var(--naranja-sol), var(--rosa-neon));
-    padding: 10px 20px;
+    padding: 15px;
     border-bottom: 3px solid var(--turquesa);
-    box-shadow: 0 0 20px rgba(0, 255, 213, 0.3);
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
-
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 15px;
-}
-
-.logo {
-    height: 90px; /* Ajustado para que no sea tan grande */
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
-    transition: transform 0.3s;
-}
-
+.logo { height: 80px; filter: drop-shadow(0 0 5px white); }
 header h1 {
     font-family: 'Orbitron', sans-serif;
-    margin: 0;
     font-size: 1.8rem;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
     text-shadow: 0 0 10px var(--turquesa);
+    margin: 10px 0;
 }
-
-/* 3. MENÚ DE NAVEGACIÓN */
-nav {
-    width: 100%;
-    margin-top: 10px;
-}
-
 nav ul {
-    margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center; /* Por defecto centrado, luego en PC lo movemos */
     gap: 15px;
     list-style: none;
+    padding: 0;
 }
-
 nav ul li a {
     text-decoration: none;
     color: white;
-    font-size: 0.9rem;
     font-weight: bold;
     text-transform: uppercase;
+    font-size: 0.9rem;
 }
 
-/* 4. BANNER (ANUNCIO) - AQUÍ ESTÁ EL ARREGLO DE LA IMAGEN */
+/* 3. BANNER */
 .banner {
-    width: 100%;
-    min-height: 150px; /* Le damos un poco más de altura */
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
-                url('img/logo.png'); /* O la imagen que uses de fondo */
-    background-size: cover;      /* Obliga a la imagen a cubrir todo el ancho */
-    background-position: center;  /* Centra el dibujo del atardecer */
-    background-repeat: no-repeat;
+    min-height: 150px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/logo.png');
+    background-size: cover;
+    background-position: center;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.banner h2 {
-    font-size: 1.4rem;
-    color: var(--turquesa);
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0 0 10px var(--rosa-neon);
-    padding: 0 20px;
     text-align: center;
 }
+.banner h2 { color: var(--turquesa); text-shadow: 2px 2px 0 var(--rosa-neon); margin: 0; }
+.subtitulo-banner { font-weight: bold; color: white; margin-top: 5px; }
 
-.banner-content {
-    display: flex;
-    flex-direction: column; /* Esto pone el texto uno debajo del otro */
-    gap: 10px; /* Espacio entre el título y el subtítulo */
+/* 4. BUSCADOR Y PRODUCTOS */
+.buscador-container { padding: 20px; text-align: center; }
+#buscador {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 20px;
+    border: 2px solid var(--turquesa);
+    background: #0f3460;
+    color: white;
 }
-
-.subtitulo-banner {
-    color: var(--turquesa); /* O blanco si prefieres */
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    /* Un brillo suave para que sea legible sobre la imagen */
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9), 0 0 5px var(--turquesa);
-    margin: 5px 0 0 0;
-}
-
-/* Ajuste para que en móvil no se vea gigante */
-@media (max-width: 600px) {
-    .subtitulo-banner {
-        font-size: 0.9rem;
-        padding: 0 10px;
-    }
-}
-
-/* 5. PRODUCTOS Y MAPAS */
 .productos {
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
     padding: 20px;
 }
-
-.tarjeta-vaper img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    padding: 10px; /* Esto crea el marco para que no pegue al borde */
-    background-color: white; /* Opcional: mantiene el fondo blanco del producto limpio */
+.tarjeta-vaper {
+    background: #16213e;
+    border: 1px solid var(--rosa-neon);
+    border-radius: 15px;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
 }
-.mapa-container {
+.tarjeta-vaper img { width: 100%; border-radius: 10px; background: white; }
+
+/* 5. BOTONES */
+.btn-agregar {
+    background: var(--turquesa);
+    color: #1a1a2e;
+    border: none;
+    padding: 10px;
     width: 100%;
-    height: 300px;
-    border: 2px solid var(--turquesa);
-    border-radius: 10px;
-    overflow: hidden;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
     margin-top: 10px;
 }
 
-/* 6. WHATSAPP FLOTANTE */
+/* 6. CARRITO E ICONO (LO QUE FALLABA) */
+/* Icono de la cesta más grande */
+/* Arreglo del icono flotante para que no estorbe */
+#icono-carrito {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--rosa-neon);
+    padding: 10px 18px;
+    border-radius: 50px;
+    z-index: 3000;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Contador del carrito (el numerito) */
+#contador-carrito {
+    background: white;
+    color: var(--rosa-neon);
+    border-radius: 50%;
+    padding: 4px 10px;
+    font-size: 1.1rem; /* Número más legible */
+    font-weight: bold;
+    min-width: 20px;
+    text-align: center;
+    display: inline-block; /* Asegura que se vea siempre */
+}
+#carrito-flotante {
+    display: none; /* Importante: oculto por defecto */
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    width: 280px;
+    background: rgba(26, 26, 46, 0.95);
+    border: 2px solid var(--naranja-sol);
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 2000;
+    backdrop-filter: blur(10px);
+}
+/* Esta clase la usará el JS para mostrarlo */
+.mostrar-carrito {
+    display: block !important;
+}
+
+/* 7. WHATSAPP */
 .whatsapp-float {
     position: fixed;
-    width: 60px;
-    height: 60px;
     bottom: 20px;
     right: 20px;
-    background-color: #25d366;
+    background: #25d366;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
-.buscador-container {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background-color: var(--fondo-oscuro);
-}
 
-#buscador {
-    width: 90%; /* Ocupa casi todo el ancho en móvil */
-    max-width: 400px;
-    padding: 12px;
-    border: 2px solid var(--turquesa);
-    border-radius: 25px; /* Bordes redondeados queda mejor */
-    background: #0f3460;
+/* Botón de WhatsApp dentro de la cesta (para que no sea gris) */
+#enviar-whatsapp-cesta {
+    background-color: #25d366; /* Verde WhatsApp */
     color: white;
-    box-shadow: 0 0 15px var(--turquesa);
-    outline: none;
-}
-
-/* 8. ESTILO DE BOTONES (PRODUCTOS Y WHATSAPP) */
-.tarjeta-vaper {
-    background: #16213e;
-    border: 1px solid var(--rosa-neon);
-    border-radius: 15px;
-    margin: 10px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
     transition: 0.3s;
 }
 
-/* Botón de Añadir a la Cesta (Turquesa Neón) */
-.tarjeta-vaper button, .btn-agregar {
-    background-color: var(--turquesa);
-    color: #1a1a2e;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    margin-top: 10px;
-    box-shadow: 0 0 10px rgba(0, 255, 213, 0.3);
+#enviar-whatsapp-cesta:hover {
+    background-color: #128c7e;
+    transform: translateY(-2px);
 }
 
-/* Efecto al pasar el ratón por el botón turquesa */
-.tarjeta-vaper button:hover {
-    background-color: white;
-    box-shadow: 0 0 20px var(--turquesa);
-    transform: scale(1.02);
+/* 8. FOOTER CENTRADO */
+footer {
+    background-color: #111; /* Color de fondo oscuro */
+    padding: 30px 20px;
+    border-top: 2px solid var(--rosa-neon);
+    text-align: center; /* Centra el texto */
+    width: 100%;
+    box-sizing: border-box;
 }
 
-/* Estilo para el botón de WhatsApp dentro de la tarjeta */
-/* Si en tu HTML este botón tiene la clase 'btn-whatsapp', usa este código: */
-.btn-whatsapp-pedido {
-    background-color: #25d366 !important;
-    color: white !important;
-    margin-top: 10px;
-    width: 100%;
-    padding: 12px 20px;
-    border-radius: 8px;
-    border: none;
+.footer-content {
+    max-width: 800px;
+    margin: 0 auto; /* Centra el bloque contenedor */
+    display: flex;
+    flex-direction: column; /* Pone los párrafos uno sobre otro */
+    align-items: center;    /* Centra los elementos hijos */
+    gap: 10px;             /* Espacio entre líneas */
+}
+
+.footer-content p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #bbb;
+}
+
+.redes {
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+    justify-content: center; /* Centra los enlaces de redes sociales */
+}
+
+.redes a {
+    color: var(--turquesa);
+    text-decoration: none;
     font-weight: bold;
+    transition: 0.3s;
+}
+
+.redes a:hover {
+    color: var(--rosa-neon);
+    text-shadow: 0 0 10px var(--rosa-neon);
+}
+
+/* PANTALLA DE MAYORÍA DE EDAD */
+.modal-edad {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.98); /* Casi negro total */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    box-shadow: 0 0 10px rgba(37, 211, 102, 0.3);
+    z-index: 9999; /* Por encima de todo */
 }
 
-.btn-whatsapp-pedido:hover {
-    background-color: #128c7e !important;
-    box-shadow: 0 0 20px #25d366;
-}
-
-/* 9. ESTILO DEL CARRITO FLOTANTE */
-#carrito-flotante {
-    position: fixed;
-    bottom: 90px; /* Para que no tape el botón de WhatsApp flotante */
-    right: 20px;
-    width: 280px;
-    background: rgba(26, 26, 46, 0.95); /* Fondo oscuro con transparencia */
-    border: 2px solid var(--naranja-sol);
+.contenido-edad {
+    background: #16213e;
+    padding: 30px;
     border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(255, 140, 0, 0.4);
-    z-index: 999;
-    backdrop-filter: blur(10px); /* Efecto cristal esmerilado */
-}
-
-#carrito-flotante h3 {
-    margin-top: 0;
-    color: var(--naranja-sol);
-    font-size: 1.2rem;
-    border-bottom: 1px solid #444;
-    padding-bottom: 10px;
+    border: 2px solid #ff007f; /* Rosa neón */
     text-align: center;
+    max-width: 400px;
+    box-shadow: 0 0 30px #ff007f;
 }
 
-#lista-cesta {
-    list-style: none;
-    padding: 0;
-    max-height: 200px;
-    overflow-y: auto; /* Si hay muchos productos, sale scroll */
-    margin-bottom: 15px;
-}
-
-#lista-cesta li {
+.botones-edad {
     display: flex;
-    justify-content: space-between;
-    font-size: 0.85rem;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 15px;
+    margin-top: 20px;
 }
 
-#carrito-flotante p {
-    font-weight: bold;
-    font-size: 1.1rem;
-    text-align: right;
-    color: var(--turquesa);
-}
-
-/* El botón de enviar dentro del carrito */
-.boton-compra {
-    background-color: var(--turquesa) !important;
-    color: #1a1a2e !important;
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: bold;
+.botones-edad button {
+    flex: 1;
+    padding: 12px;
     border: none;
+    border-radius: 5px;
+    font-weight: bold;
     cursor: pointer;
     text-transform: uppercase;
-    transition: 0.3s;
 }
 
-.boton-compra:hover {
-    background-color: white !important;
-    box-shadow: 0 0 15px var(--turquesa);
+.etiqueta-categoria {
+    background: rgba(0, 255, 213, 0.1);
+    color: var(--turquesa);
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    border: 1px solid var(--turquesa);
+    display: inline-block;
+    margin-bottom: 5px;
 }
 
-/* Estilo del icono de la cesta */
-#icono-carrito {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--rosa-neon);
-    padding: 10px 15px;
-    border-radius: 50px;
-    cursor: pointer;
-    z-index: 1001;
-    box-shadow: 0 0 15px var(--rosa-neon);
-    font-size: 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-#contador-carrito {
-    background: white;
-    color: var(--rosa-neon);
-    border-radius: 50%;
-    padding: 2px 7px;
-    font-size: 0.8rem;
-    font-weight: bold;
-}
-
-/* Modificamos el carrito para que empiece oculto */
-#carrito-flotante {
-    display: none; /* Se ocultará al inicio */
-    position: fixed;
-    top: 80px; /* Aparece debajo del icono */
-    right: 20px;
-    /* ... el resto de tu estilo de carrito se mantiene ... */
-}
-
-/* Clase para mostrarlo con JavaScript */
-#carrito-flotante.activo {
-    display: block !important;
-}
-
-/* 7. REGLAS PARA MÓVIL (DEBEN IR AL FINAL) */
+/* 8. MÓVIL */
 @media (max-width: 600px) {
-    header h1 { font-size: 1.3rem; }
-    .logo { height: 45px; }
-    .banner { height: 120px; }
-    .banner h2 { font-size: 1.1rem; }
-    nav ul { gap: 8px; }
-    nav ul li a { font-size: 0.75rem; }
-}
-
-/* Regla para PC: situar el menú abajo a la derecha */
-@media (min-width: 800px) {
-    header { min-height: 100px; align-items: flex-start; }
-    nav { position: absolute; bottom: 10px; right: 20px; width: auto; }
+    .tarjeta-vaper { width: 90%; }
+    header h1 { font-size: 1.4rem; }
 }

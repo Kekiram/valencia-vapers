@@ -11,11 +11,11 @@
 
     <div id="aviso-edad" class="modal-edad">
     <div class="contenido-edad">
-        <h2>🔞 Acceso Restringido</h2>
-        <p>Debes ser mayor de 18 años para entrar en Valencia Vapers. Al entrar, confirmas que eres mayor de 18 años y aceptas el uso de cookies técnicas para la gestión de tu sesión. ¿Confirmas que eres mayor de edad?</p>
+        <h2>🔞 ACCESO RESTRINGIDO</h2>
+        <p>Debes confirmar que eres <strong>mayor de 18 años</strong> para entrar en Valencia Vapers.</p>
         <div class="botones-edad">
-            <button onclick="confirmarEdad()">Sí, soy mayor de edad</button>
-            <button onclick="salirTienda()">No, soy menor</button>
+            <button onclick="confirmarEdad()" style="background:#00ffd5; color:#1a1a2e;">Sí, soy mayor</button>
+            <button onclick="salirTienda()" style="background:#ff4444; color:white;">Soy menor</button>
         </div>
     </div>
 </div>
@@ -26,16 +26,23 @@
       
     </div>
         <h1>Valencia Vapers</h1>
-        <nav>
-            <div id="icono-carrito" onclick="toggleCarrito()">
+    <nav>
+    <div id="icono-carrito" onclick="toggleCarrito()">
         🛒 <span id="contador-carrito">0</span>
     </div>
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+    <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<div id="carrito-flotante" style="display: none;">
+    <h3>Tu Cesta 🛒</h3>
+    <ul id="lista-cesta"></ul>
+    <p>Total: <span id="total-precio">0</span>€</p>
+    <button id="enviar-whatsapp-cesta" class="boton-compra">Pedir por WhatsApp</button>
+    </div>
     </header>
 
     <main>
@@ -74,15 +81,7 @@
         </section>
     </main>
 
-    <div id="icono-carrito" onclick="toggleCarrito()" style="position: fixed; top: 20px; right: 20px; background: #ff007f; padding: 10px; border-radius: 50%; cursor: pointer; z-index: 1001; box-shadow: 0 0 15px #ff007f;">
-    🛒 <span id="contador-carrito" style="background: white; color: #ff007f; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; font-weight: bold;">0</span>
-</div>
-
-<div id="carrito-flotante" style="display: none;">
-    <h3>Tu Cesta 🛒</h3>
-    <ul id="lista-cesta"></ul>
-    <p>Total: <span id="total-precio">0</span>€</p>
-    <button id="enviar-whatsapp-cesta" class="boton-compra">Pedir por WhatsApp</button>
+   
 </div>
 
     <footer>
