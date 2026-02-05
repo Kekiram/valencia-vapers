@@ -109,4 +109,28 @@ window.onclick = function(event) {
     if (typeof inventario !== 'undefined') {
         mostrarProductos(inventario);
     }
+
+    /* --- PARTE NUEVA PARA EL CARRITO --- */
+
+// Esta función abre y cierra el carrito al pulsar el icono
+function toggleCarrito() {
+    const carritoDiv = document.getElementById('carrito-flotante');
+    if (carritoDiv.style.display === "none" || carritoDiv.style.display === "") {
+        carritoDiv.style.display = "block";
+    } else {
+        carritoDiv.style.display = "none";
+    }
+}
+
+// Esta función actualiza el numerito del icono 🛒
+function actualizarContador() {
+    const contador = document.getElementById('contador-carrito');
+    if (contador) {
+        contador.innerText = carrito.length;
+    }
+}
+
+// Busca tu función 'agregarAlCarrito' actual y asegúrate 
+// de que tenga esta línea dentro para que el número cambie:
+// actualizarContador();
 });

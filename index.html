@@ -74,12 +74,16 @@
         </section>
     </main>
 
-    <div id="carrito-flotante">
-        <h3>Tu Cesta 🛒</h3>
-        <ul id="lista-cesta"></ul>
-        <p>Total: <span id="total-precio">0</span>€</p>
-        <button id="enviar-whatsapp-cesta" class="boton-compra">Pedir por WhatsApp</button>
-    </div>
+    <div id="icono-carrito" onclick="toggleCarrito()" style="position: fixed; top: 20px; right: 20px; background: #ff007f; padding: 10px; border-radius: 50%; cursor: pointer; z-index: 1001; box-shadow: 0 0 15px #ff007f;">
+    🛒 <span id="contador-carrito" style="background: white; color: #ff007f; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; font-weight: bold;">0</span>
+</div>
+
+<div id="carrito-flotante" style="display: none;">
+    <h3>Tu Cesta 🛒</h3>
+    <ul id="lista-cesta"></ul>
+    <p>Total: <span id="total-precio">0</span>€</p>
+    <button id="enviar-whatsapp-cesta" class="boton-compra">Pedir por WhatsApp</button>
+</div>
 
     <footer>
         <div class="footer-content">
