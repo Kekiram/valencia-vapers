@@ -141,6 +141,25 @@ header {
     object-fit: contain;
 }
 
+.spinner-busqueda {
+    position: absolute;
+    right: 50px; /* Al lado de la lupa */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 0, 127, 0.2);
+    border-top: 3px solid var(--primario); /* Rosa neón */
+    border-radius: 50%;
+    display: none; /* Oculto por defecto */
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translateY(-50%) rotate(0deg); }
+    100% { transform: translateY(-50%) rotate(360deg); }
+}
+
 /* --- LOGO CENTRO --- */
 .logo-container {
     justify-self: center;
@@ -433,4 +452,12 @@ nav.nav-principal ul li a:hover {
     .header-main { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
     .search-bar-container, .logo-container, .header-icons { justify-self: center; text-align: center; }
     .banner-grid-categorias { grid-template-columns: 1fr; }
+}
+
+header {
+    z-index: 1001; /* Un punto por encima del overlay (900) */
+}
+
+.search-bar-container {
+    z-index: 1002; /* Para que las sugerencias siempre se vean */
 }

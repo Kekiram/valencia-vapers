@@ -55,7 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const inputBuscador = document.getElementById('buscador');
     const cajaSugerencias = document.getElementById('sugerencias-busqueda');
-    const overlay = document.getElementById('overlay-oscuro'); // Asegúrate de que el ID coincida con tu HTML
+    const overlay = document.getElementById('overlay-oscuro');
+    const spinner = document.getElementById('loading-spinner'); // Referencia al spinner
+
+    // Variable para controlar el tiempo de espera del buscador
+    let buscadorTimer;
 
     function inicializarTienda() {
         if (typeof inventario === 'undefined') return;
@@ -68,56 +72,71 @@ document.addEventListener('DOMContentLoaded', () => {
         inputBuscador.addEventListener('input', (e) => {
             const texto = e.target.value.toLowerCase().trim();
             
-            // FILTRADO EN PÁGINA PRINCIPAL
-            const filtrados = inventario.filter(p => 
-                p.nombre.toLowerCase().includes(texto) || 
-                (p.categoria && p.categoria.toLowerCase().includes(texto))
-            );
-            
-            if(texto !== "") {
-                if(document.getElementById('seccion-novedades')) document.getElementById('seccion-novedades').style.display = 'none';
-                if(document.getElementById('seccion-top')) document.getElementById('seccion-top').style.display = 'none';
-            } else {
-                if(document.getElementById('seccion-novedades')) document.getElementById('seccion-novedades').style.display = 'block';
-                if(document.getElementById('seccion-top')) document.getElementById('seccion-top').style.display = 'block';
-            }
-            mostrarEnContenedor(filtrados, contTodos);
-
-            // LÓGICA DE SUGERENCIAS FLOTANTES (Diseño de lista)
-            if (texto.length < 2) {
-                cajaSugerencias.style.display = 'none';
-                return;
+            // 1. Mostramos el spinner si hay texto
+            if (texto.length > 0 && spinner) {
+                spinner.style.display = 'block';
             }
 
-            const coincidencias = inventario.filter(p => p.nombre.toLowerCase().includes(texto)).slice(0, 6);
+            // 2. Limpiamos el temporizador anterior para no saturar
+            clearTimeout(buscadorTimer);
 
-            if (coincidencias.length > 0) {
-                cajaSugerencias.innerHTML = '';
-                coincidencias.forEach(p => {
-                    const div = document.createElement('div');
-                    div.className = 'sugerencia-item'; // Clase unificada con el CSS
-                    div.innerHTML = `
-                        <img src="${p.img}" alt="${p.nombre}">
-                        <div class="sugerencia-info">
-                            <span class="sugerencia-nombre">${p.nombre}</span>
-                            <span class="sugerencia-precio">${p.precio.toFixed(2)}€</span>
-                        </div>
-                    `;
-                    div.onclick = () => {
-                        inputBuscador.value = p.nombre;
-                        cajaSugerencias.style.display = 'none';
-                        if(overlay) overlay.style.display = 'none';
-                        
-                        // Mostramos solo el producto elegido y hacemos scroll
-                        mostrarEnContenedor(inventario.filter(prod => prod.nombre === p.nombre), contTodos);
-                        contTodos.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    };
-                    cajaSugerencias.appendChild(div);
-                });
-                cajaSugerencias.style.display = 'block';
-            } else {
-                cajaSugerencias.style.display = 'none';
-            }
+            // 3. Iniciamos la búsqueda tras un pequeño retraso de 400ms
+            buscadorTimer = setTimeout(() => {
+                
+                // FILTRADO EN PÁGINA PRINCIPAL
+                const filtrados = inventario.filter(p => 
+                    p.nombre.toLowerCase().includes(texto) || 
+                    (p.categoria && p.categoria.toLowerCase().includes(texto))
+                );
+                
+                if(texto !== "") {
+                    if(document.getElementById('seccion-novedades')) document.getElementById('seccion-novedades').style.display = 'none';
+                    if(document.getElementById('seccion-top')) document.getElementById('seccion-top').style.display = 'none';
+                } else {
+                    if(document.getElementById('seccion-novedades')) document.getElementById('seccion-novedades').style.display = 'block';
+                    if(document.getElementById('seccion-top')) document.getElementById('seccion-top').style.display = 'block';
+                }
+                mostrarEnContenedor(filtrados, contTodos);
+
+                // LÓGICA DE SUGERENCIAS FLOTANTES
+                if (texto.length < 2) {
+                    cajaSugerencias.style.display = 'none';
+                    if (spinner) spinner.style.display = 'none'; // Ocultar si se borra texto
+                    return;
+                }
+
+                const coincidencias = inventario.filter(p => p.nombre.toLowerCase().includes(texto)).slice(0, 6);
+
+                if (coincidencias.length > 0) {
+                    cajaSugerencias.innerHTML = '';
+                    coincidencias.forEach(p => {
+                        const div = document.createElement('div');
+                        div.className = 'sugerencia-item';
+                        div.innerHTML = `
+                            <img src="${p.img}" alt="${p.nombre}">
+                            <div class="sugerencia-info">
+                                <span class="sugerencia-nombre">${p.nombre}</span>
+                                <span class="sugerencia-precio">${p.precio.toFixed(2)}€</span>
+                            </div>
+                        `;
+                        div.onclick = () => {
+                            inputBuscador.value = p.nombre;
+                            cajaSugerencias.style.display = 'none';
+                            if(overlay) overlay.style.display = 'none';
+                            mostrarEnContenedor(inventario.filter(prod => prod.nombre === p.nombre), contTodos);
+                            contTodos.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        };
+                        cajaSugerencias.appendChild(div);
+                    });
+                    cajaSugerencias.style.display = 'block';
+                } else {
+                    cajaSugerencias.style.display = 'none';
+                }
+
+                // 4. Ocultamos el spinner al terminar la búsqueda
+                if (spinner) spinner.style.display = 'none';
+
+            }, 400); // Este es el tiempo del efecto de "carga"
         });
 
         inputBuscador.addEventListener('focus', () => {
@@ -125,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if(overlay) overlay.style.display = 'block';
         });
 
-        // Cerrar buscador al hacer clic fuera
         document.addEventListener('click', (e) => {
             if (!inputBuscador.contains(e.target) && !cajaSugerencias.contains(e.target)) {
                 if(overlay) overlay.style.display = 'none';
