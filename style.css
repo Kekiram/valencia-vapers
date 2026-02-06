@@ -1,314 +1,358 @@
-/* 1. BASE */
-html { scroll-behavior: smooth; }
+/* 1. VARIABLES Y BASE */
 :root {
-    --naranja-sol: #ff8c00;
-    --rosa-neon: #ff007f;
-    --turquesa: #00ffd5;
-    --fondo-oscuro: #1a1a2e;
-    --texto: #ffffff;
+    --primario: #ff007f;
+    --oscuro-total: #121212; 
+    --oscuro-tarjeta: #1e1e1e;
+    --texto-gris: #b3b3b3;
+    --blanco: #ffffff;
+    --borde: rgba(255, 255, 255, 0.1);
+    --verde-wa: #25d366;
 }
+
+html { scroll-behavior: smooth; }
+
 body {
-    background-color: var(--fondo-oscuro);
-    color: var(--texto);
-    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--oscuro-total);
+    color: var(--blanco);
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
 }
 
-/* 2. HEADER Y NAVEGACIÓN */
+/* 2. HEADER ESTRUCTURA PROFESIONAL */
 header {
-    background: linear-gradient(135deg, var(--naranja-sol), var(--rosa-neon));
-    padding: 15px;
-    border-bottom: 3px solid var(--turquesa);
-    display: flex;
-    flex-direction: column;
+    background: #000000;
+    border-bottom: 1px solid var(--primario);
+}
+
+/* Fila principal del header */
+.header-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Divide el espacio en 3 partes exactamente iguales */
     align-items: center;
+    padding: 20px 40px;
+    background: #000;
+}
+
+/* Tres bloques iguales para que el logo sea el centro real */
+.search-bar-container, 
+.logo-container, 
+.header-icons {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* --- BUSCADOR --- */
+.search-bar-container {
+    justify-self: start; /* Alinea el buscador a la izquierda del primer bloque */
     position: relative;
-}
-.logo { height: 80px; filter: drop-shadow(0 0 5px white); }
-header h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 1.8rem;
-    text-shadow: 0 0 10px var(--turquesa);
-    margin: 10px 0;
-}
-nav ul {
-    display: flex;
-    gap: 15px;
-    list-style: none;
-    padding: 0;
-}
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-}
-
-/* 3. BANNER */
-.banner {
-    min-height: 150px;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('img/logo.png');
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-.banner h2 { color: var(--turquesa); text-shadow: 2px 2px 0 var(--rosa-neon); margin: 0; }
-.subtitulo-banner { font-weight: bold; color: white; margin-top: 5px; }
-
-/* 4. BUSCADOR Y PRODUCTOS */
-.buscador-container { padding: 20px; text-align: center; }
-#buscador {
-    width: 80%;
-    max-width: 400px;
-    padding: 10px;
-    border-radius: 20px;
-    border: 2px solid var(--turquesa);
-    background: #0f3460;
-    color: white;
-}
-.productos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-}
-.tarjeta-vaper {
-    background: #16213e;
-    border: 1px solid var(--rosa-neon);
-    border-radius: 15px;
-    padding: 15px;
-    width: 250px;
-    text-align: center;
-}
-.tarjeta-vaper img { width: 100%; border-radius: 10px; background: white; }
-
-.titulo-seccion {
-    text-align: center;
-    color: var(--turquesa);
-    font-family: 'Orbitron', sans-serif;
-    margin: 40px 0 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Efecto especial para las tarjetas de novedades */
-.especial-novedad {
-    border: 1px solid #00ffd5;
-    box-shadow: 0 0 10px rgba(0, 255, 213, 0.2);
-}
-
-/* Efecto especial para los top ventas */
-.especial-top {
-    border: 1px solid #ffcc00;
-    box-shadow: 0 0 10px rgba(255, 204, 0, 0.2);
-}
-
-.productos-especiales {
-    background: rgba(255, 255, 255, 0.02);
-    padding: 20px 0;
-    border-radius: 15px;
-    margin-bottom: 30px;
-}
-
-/* 5. BOTONES */
-.btn-agregar {
-    background: var(--turquesa);
-    color: #1a1a2e;
-    border: none;
-    padding: 10px;
     width: 100%;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
+    max-width: 350px;
 }
 
-/* 6. CARRITO E ICONO (LO QUE FALLABA) */
-/* Icono de la cesta más grande */
-/* Arreglo del icono flotante para que no estorbe */
-#icono-carrito {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--rosa-neon);
-    padding: 10px 18px;
+#buscador {
+    width: 100%;
+    height: 45px;
+    padding: 0 50px 0 20px;
     border-radius: 50px;
-    z-index: 3000;
-    font-size: 1.5rem;
+    border: none;
+    font-size: 15px;
+    outline: none;
+    box-shadow: 0 2px 10px rgba(255, 0, 127, 0.2); /* Sombra rosa sutil */
+}
+
+.btn-search {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #ff007f;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.sugerencias-box {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    display: none;
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* BLOQUE CENTRAL: Logo */
+.logo-container {
+    justify-self: center; /* ESTO centra el logo perfectamente en la pantalla */
+}
+
+.logo-pro {
+    height: 120px; /* Tamaño más grande para que sea el protagonista */
+    width: auto;
+}
+
+/* --- ICONO CARRITO --- */
+.header-icons {
+    justify-self: end; /* Alinea la cesta a la derecha del último bloque */
+}
+
+#icono-carrito {
+    background: #ff007f;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 800;
+    color: white;
+    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
 }
 
-/* Contador del carrito (el numerito) */
-#contador-carrito {
-    background: white;
-    color: var(--rosa-neon);
-    border-radius: 50%;
-    padding: 4px 10px;
-    font-size: 1.1rem; /* Número más legible */
-    font-weight: bold;
-    min-width: 20px;
-    text-align: center;
-    display: inline-block; /* Asegura que se vea siempre */
-}
-#carrito-flotante {
-    display: none; /* Importante: oculto por defecto */
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    width: 280px;
-    background: rgba(26, 26, 46, 0.95);
-    border: 2px solid var(--naranja-sol);
-    padding: 15px;
-    border-radius: 10px;
-    z-index: 2000;
-    backdrop-filter: blur(10px);
-}
-/* Esta clase la usará el JS para mostrarlo */
-.mostrar-carrito {
-    display: block !important;
-}
-
-/* 7. WHATSAPP */
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25d366;
-    width: 60px;
-    height: 60px;
-    border-radius: 50px;
+/* 3. NAVEGACIÓN */
+nav.nav-principal ul {
     display: flex;
     justify-content: center;
+    gap: 30px;
+    list-style: none;
+    padding: 15px 0;
+    margin: 0;
+    background: #080808;
+}
+
+nav.nav-principal ul li a {
+    text-decoration: none;
+    color: var(--texto-gris);
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+nav.nav-principal ul li a:hover { color: var(--primario); }
+
+/* 4. GRID DE CATEGORÍAS */
+.banner-grid-categorias {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* El de "Desechables" ocupa más espacio */
+    gap: 20px;
+    max-width: 1300px;
+    margin: 30px auto;
+}
+
+.banner-cat {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #000;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    transition: 0.3s;
+    border: 2px solid transparent;
+}
+
+.banner-grande {
+    height: 300px;
+    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/banner-desechables.jpg');
+    background-size: cover;
+    border: 2px solid var(--primario);
+}
+
+.banner-peques {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.peqe {
+    height: 142px;
+    background: linear-gradient(45deg, #1a1a1a, #000);
+    border: 1px solid rgba(255, 0, 127, 0.3);
+}
+
+.banner-cat h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    text-shadow: 0 0 10px var(--primario);
+}
+
+/* 5. PRODUCTOS */
+.productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tarjeta-vaper {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    transition: 0.3s;
+    position: relative;
+}
+
+.tarjeta-vaper img { width: 100%; height: 180px; object-fit: contain; }
+
+.tarjeta-vaper h3 { color: #222; font-size: 1rem; margin: 15px 0; }
+
+.tarjeta-vaper p { color: var(--primario); font-size: 1.4rem; font-weight: 800; }
+
+.btn-agregar {
+    background: #222;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tarjeta-vaper:hover .btn-agregar { background: var(--primario); }
+
+/* 6. CARRITO FLOTANTE Y OVERLAYS */
+#carrito-flotante {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    width: 320px;
+    background: #1a1a1a;
+    border: 1px solid var(--primario);
+    padding: 20px;
+    border-radius: 8px;
+    z-index: 2000;
+    display: none;
+}
+
+.overlay-oscuro {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 900;
+    display: none;
+    backdrop-filter: blur(4px);
+}
+
+/* 7. WHATSAPP Y MODAL */
+.whatsapp-float {
+    position: fixed;
+    bottom: 25px; left: 25px;
+    background: var(--verde-wa);
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
     z-index: 1000;
 }
 
-/* Botón de WhatsApp dentro de la cesta (para que no sea gris) */
 #enviar-whatsapp-cesta {
-    background-color: #25d366; /* Verde WhatsApp */
-    color: white;
+    width: 100%;
+    background-color: #ffffff;
+    color: #000000;
     border: none;
     padding: 12px;
-    width: 100%;
-    border-radius: 8px;
-    font-weight: bold;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 5px;
     cursor: pointer;
-    text-transform: uppercase;
-    box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
     transition: 0.3s;
 }
 
 #enviar-whatsapp-cesta:hover {
-    background-color: #128c7e;
-    transform: translateY(-2px);
+    background-color: var(--primario);
+    color: white;
 }
 
-/* 8. FOOTER CENTRADO */
-footer {
-    background-color: #111; /* Color de fondo oscuro */
-    padding: 30px 20px;
-    border-top: 2px solid var(--rosa-neon);
-    text-align: center; /* Centra el texto */
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.footer-content {
-    max-width: 800px;
-    margin: 0 auto; /* Centra el bloque contenedor */
-    display: flex;
-    flex-direction: column; /* Pone los párrafos uno sobre otro */
-    align-items: center;    /* Centra los elementos hijos */
-    gap: 10px;             /* Espacio entre líneas */
-}
-
-.footer-content p {
-    margin: 5px 0;
-    font-size: 0.9rem;
-    color: #bbb;
-}
-
-.redes {
-    margin-top: 15px;
-    display: flex;
-    gap: 20px;
-    justify-content: center; /* Centra los enlaces de redes sociales */
-}
-
-.redes a {
-    color: var(--turquesa);
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.redes a:hover {
-    color: var(--rosa-neon);
-    text-shadow: 0 0 10px var(--rosa-neon);
-}
-
-/* PANTALLA DE MAYORÍA DE EDAD */
+/* EDAD */
 .modal-edad {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.98); /* Casi negro total */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* Por encima de todo */
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
 }
 
 .contenido-edad {
-    background: #16213e;
-    padding: 30px;
-    border-radius: 15px;
-    border: 2px solid #ff007f; /* Rosa neón */
+    background: #0a0a0a;
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--primario);
     text-align: center;
-    max-width: 400px;
-    box-shadow: 0 0 30px #ff007f;
 }
 
 .botones-edad {
     display: flex;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 25px;
 }
 
-.botones-edad button {
-    flex: 1;
-    padding: 12px;
+.btn-confirmar {
+    background-color: var(--primario);
+    color: white;
     border: none;
-    border-radius: 5px;
+    padding: 15px 30px;
     font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-salir {
+    background: transparent;
+    color: #888;
+    border: 1px solid #444;
+    padding: 15px 30px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+.btn-confirmar:hover {
+    box-shadow: 0 0 20px var(--primario);
+}
+
+/* botones comprar */
+.btn-comprar {
+    background-color: var(--primario); /* El rosa neón */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 4px;
     cursor: pointer;
     text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
 }
 
-.etiqueta-categoria {
-    background: rgba(0, 255, 213, 0.1);
-    color: var(--turquesa);
-    font-size: 0.7rem;
-    padding: 3px 8px;
-    border-radius: 10px;
-    text-transform: uppercase;
-    border: 1px solid var(--turquesa);
-    display: inline-block;
-    margin-bottom: 5px;
+.btn-comprar:hover {
+    background-color: #ff3399;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 127, 0.8);
 }
 
-/* 8. MÓVIL */
-@media (max-width: 600px) {
-    .tarjeta-vaper { width: 90%; }
-    header h1 { font-size: 1.4rem; }
+/* 8. RESPONSIVE */
+@media (max-width: 768px) {
+    .header-main { flex-direction: column; gap: 15px; }
+    .banner-grid-categorias { grid-template-columns: 1fr; }
+    .productos { grid-template-columns: 1fr 1fr; }
 }

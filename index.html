@@ -6,72 +6,120 @@
     <title>Vaper Store | Los mejores dispositivos</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <div id="overlay-busqueda" class="overlay-oscuro"></div>
+
     <div id="aviso-edad" class="modal-edad">
-    <div class="contenido-edad">
-        <h2>🔞 ACCESO RESTRINGIDO</h2>
-        <p>Debes confirmar que eres <strong>mayor de 18 años</strong> para entrar en Valencia Vapers.</p>
-        <div class="botones-edad">
-            <button onclick="confirmarEdad()" style="background:#00ffd5; color:#1a1a2e;">Sí, soy mayor</button>
-            <button onclick="salirTienda()" style="background:#ff4444; color:white;">Soy menor</button>
+        <div class="contenido-edad">
+            <div class="neon-icon">🔞</div>
+            <h2>ACCESO RESTRINGIDO</h2>
+            <p>Debes confirmar que eres <strong>mayor de 18 años</strong> para entrar en Valencia Vapers.</p>
+            <div class="botones-edad">
+                <button class="btn-confirmar" onclick="confirmarEdad()">SÍ, SOY MAYOR</button>
+                <button class="btn-salir" onclick="salirTienda()">SOY MENOR</button>
+            </div>
         </div>
     </div>
-</div>
 
-    <header>
-        <div class="header-content">
-        <img src="img/logo.png" alt="Logo Valencia Vapers" class="logo">
-      
-    </div>
-        <h1>Valencia Vapers</h1>
-    <nav>
-    <div id="icono-carrito" onclick="toggleCarrito()">
-        🛒 <span id="contador-carrito">0</span>
-    </div>
-    <ul>
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-    </ul>
-</nav>
+    <header class="header-vapeo">
+        <div class="header-main">
+            <div class="search-bar-container">
+                <input type="text" id="buscador" placeholder="Buscar producto..." autocomplete="off">
+                <button class="btn-search">🔍</button>
+                <div id="sugerencias-busqueda" class="sugerencias-box"></div>
+            </div>
 
-<div id="carrito-flotante" style="display: none;">
-    <h3>Tu Cesta 🛒</h3>
-    <ul id="lista-cesta"></ul>
-    <p>Total: <span id="total-precio">0</span>€</p>
-    <button id="enviar-whatsapp-cesta" class="boton-compra">Pedir por WhatsApp</button>
-    </div>
+            <div class="logo-container">
+                <img src="img/logo.png" alt="Valencia Vapers" class="logo-pro">
+            </div>
+
+            <div class="header-icons">
+                <div id="icono-carrito" onclick="toggleCarrito()">
+                    <span class="icon-text">MI CESTA</span>
+                    <div class="cart-wrapper">
+                        🛒 <span id="contador-carrito">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <nav class="nav-principal">
+            <ul>
+                <li><a href="#">INICIO</a></li>
+                <li><a href="#">DESECHABLES</a></li>
+                <li><a href="#">LÍQUIDOS</a></li>
+                <li><a href="#">KITS / MODS</a></li>
+                <li><a href="#">RESISTENCIAS</a></li>
+                <li><a href="#contacto">TIENDAS</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <main>
-        <section class="banner">
-         <div class="banner-content">
-            <h2>TU TIENDA DE VAPEO</h2>
-            <p class="subtitulo-banner">Haz tu pedido por WhatsApp y lo tendras preparado en la tienda que nos digas listo para recoger y sin esperas</p>
-         </div>
-        </section>
+    <div id="carrito-flotante">
+        <h2 style="color: var(--primario); margin-top: 0;">TU CESTA</h2>
+        <ul id="lista-cesta" style="list-style: none; padding: 0; max-height: 300px; overflow-y: auto;"></ul>
+        
+        <div class="total-container">
+            <span>TOTAL:</span>
+            <span><span id="total-precio">0.00</span>€</span>
+        </div>
 
-        <section class="buscador-container">
-             <input type="text" id="buscador" placeholder="Busca tu vaper favorito...">
+        <div class="selector-tienda" style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #444;"> 
+            <label style="color: #bbb; font-size: 0.8rem; display: block; margin-bottom: 8px;">📍 PUNTO DE RECOGIDA:</label> 
+            <select id="tienda-select" style="width: 100%; padding: 10px; background: #222; color: white; border: 1px solid #ff007f; border-radius: 4px;"> 
+                <option value="Paiporta">Paiporta</option> 
+                <option value="Torrente">Torrente</option> 
+            </select> 
+        </div>
+
+        <button id="enviar-whatsapp-cesta">
+            <span>Finalizar pedido</span>
+            <span style="font-size: 1.2rem;">➔</span>
+        </button>
+    </div>
+
+    <main>
+        <section class="banner-grid-categorias">
+            <div class="banner-cat banner-grande" onclick="filtrarPorCategoria('Desechables')">
+                <div class="banner-info">
+                    <h3>DESECHABLES</h3>
+                    <span>Ya disponibles</span>
+                    <button class="btn-comprar">COMPRAR</button>
+                </div>
+            </div>
+
+            <div class="banner-peques">
+                <div class="banner-cat peqe" onclick="filtrarPorCategoria('Líquidos')">
+                    <h3>LÍQUIDOS</h3>
+                </div>
+                <div class="banner-cat peqe" onclick="filtrarPorCategoria('Kits')">
+                    <h3>MODS / KITS</h3>
+                </div>
+                <div class="banner-cat peqe" onclick="filtrarPorCategoria('Resistencias')">
+                    <h3>RESISTENCIAS</h3>
+                </div>
+                <div class="banner-cat peqe neon-sales" onclick="filtrarPorCategoria('Sales')">
+                    <h3>SALES NICOTINA</h3>
+                </div>
+            </div>
         </section>
 
         <section id="seccion-novedades" class="productos-especiales">
-    <h2 class="titulo-seccion">🔥 Novedades</h2>
-    <div id="contenedor-novedades" class="productos"></div>
-</section>
+            <h2 class="titulo-seccion">🔥 Novedades</h2>
+            <div id="contenedor-novedades" class="productos"></div>
+        </section>
 
-<section id="seccion-top" class="productos-especiales">
-    <h2 class="titulo-seccion">⭐️ Los más vendidos</h2>
-    <div id="contenedor-top" class="productos"></div>
-</section>
+        <section id="seccion-top" class="productos-especiales">
+            <h2 class="titulo-seccion">⭐️ Los más vendidos</h2>
+            <div id="contenedor-top" class="productos"></div>
+        </section>
 
-<h2 class="titulo-seccion">Todos los productos</h2>
-<section id="contenedor-productos" class="productos"></section>
-
+        <h2 class="titulo-seccion">Todos los productos</h2>
         <section id="contenedor-productos" class="productos"></section>
-        
+
         <section id="contacto" class="contacto">
             <h2>Nuestras Tiendas en Valencia</h2>
             <div class="contenedor-mapas">
@@ -79,23 +127,20 @@
                     <h3>Paiporta</h3>
                     <p>Calle San Antonio 20, Paiporta</p>
                     <div class="mapa-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3081.564773223018!2d-0.4216839234125807!3d39.4339178151978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd604f03a647a769%3A0x6b4c3e3a3f0f5b4d!2sC.%20de%20Sant%20Antoni%2C%2020%2C%2046200%20Paiporta%2C%20Valencia!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
+                        <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
 
                 <div class="tienda">
                     <h3>Torrente</h3>
                     <p>Calle Pintor Renau 44, Torrente</p>
                     <div class="mapa-container">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3081.353386348651!2d-0.4816005234123514!3d39.43867621491295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6050308a0d014b%3A0x8929944a169b2b2b!2sC.%20del%20Pintor%20Renau%2C%2044%2C%2046900%20Torrent%2C%20Valencia!5e0!3m2!1ses!2ses!4v1710000000000!5m2!1ses!2ses" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
+                        <iframe src="https://www.google.com/maps/embed?pb=..." width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
-
-   
-</div>
 
     <footer>
         <div class="footer-content">
@@ -107,7 +152,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/34607280031?text=Hola!%20Tengo%20una%20duda" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/34607280031" class="whatsapp-float" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
     </a>
 
