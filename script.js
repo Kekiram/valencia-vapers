@@ -31,8 +31,7 @@ window.mostrarEnContenedor = function(productosAMostrar, contenedor) {
     productosAMostrar.forEach(producto => {
         const tarjeta = document.createElement('div');
         tarjeta.classList.add('tarjeta-vaper');
-        if(producto.etiqueta) tarjeta.classList.add('especial-' + producto.etiqueta);
-
+        
         tarjeta.innerHTML = `
             <span class="etiqueta-categoria">${producto.categoria || 'Vaper'}</span>
             <img src="${producto.img}" alt="${producto.nombre}">
@@ -54,24 +53,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const listaCesta = document.getElementById('lista-cesta');
     const totalPrecio = document.getElementById('total-precio');
     
-    // ELEMENTOS DEL BUSCADOR E INTELIGENCIA
     const inputBuscador = document.getElementById('buscador');
     const cajaSugerencias = document.getElementById('sugerencias-busqueda');
-    const overlay = document.getElementById('overlay-busqueda');
+    const overlay = document.getElementById('overlay-oscuro'); // Asegúrate de que el ID coincida con tu HTML
 
     function inicializarTienda() {
         if (typeof inventario === 'undefined') return;
-        mostrarEnContenedor(inventario.filter(p => p.etiqueta === 'novedad'), contNovedades);
-        mostrarEnContenedor(inventario.filter(p => p.etiqueta === 'top'), contTop);
-        mostrarEnContenedor(inventario, contTodos);
+        if(contNovedades) mostrarEnContenedor(inventario.filter(p => p.etiqueta === 'novedad'), contNovedades);
+        if(contTop) mostrarEnContenedor(inventario.filter(p => p.etiqueta === 'top'), contTop);
+        if(contTodos) mostrarEnContenedor(inventario, contTodos);
     }
 
-    // LÓGICA DEL BUSCADOR E INTERFAZ
     if(inputBuscador) {
         inputBuscador.addEventListener('input', (e) => {
-            const texto = e.target.value.toLowerCase();
+            const texto = e.target.value.toLowerCase().trim();
             
-            // 1. Filtrado en la página principal
+            // FILTRADO EN PÁGINA PRINCIPAL
             const filtrados = inventario.filter(p => 
                 p.nombre.toLowerCase().includes(texto) || 
                 (p.categoria && p.categoria.toLowerCase().includes(texto))
@@ -86,32 +83,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             mostrarEnContenedor(filtrados, contTodos);
 
-            // 2. Lógica de Sugerencias Visuales (Flotantes)
+            // LÓGICA DE SUGERENCIAS FLOTANTES (Diseño de lista)
             if (texto.length < 2) {
                 cajaSugerencias.style.display = 'none';
                 return;
             }
 
-            const coincidencias = inventario.filter(p => p.nombre.toLowerCase().includes(texto)).slice(0, 5);
+            const coincidencias = inventario.filter(p => p.nombre.toLowerCase().includes(texto)).slice(0, 6);
 
             if (coincidencias.length > 0) {
                 cajaSugerencias.innerHTML = '';
                 coincidencias.forEach(p => {
                     const div = document.createElement('div');
-                    div.className = 'item-sugerido';
+                    div.className = 'sugerencia-item'; // Clase unificada con el CSS
                     div.innerHTML = `
                         <img src="${p.img}" alt="${p.nombre}">
-                        <div class="info-sugerida">
-                            <h4>${p.nombre}</h4>
-                            <span>${p.precio.toFixed(2)}€</span>
+                        <div class="sugerencia-info">
+                            <span class="sugerencia-nombre">${p.nombre}</span>
+                            <span class="sugerencia-precio">${p.precio.toFixed(2)}€</span>
                         </div>
                     `;
                     div.onclick = () => {
                         inputBuscador.value = p.nombre;
                         cajaSugerencias.style.display = 'none';
-                        overlay.style.display = 'none';
-                        // Disparamos el filtro principal con el nombre elegido
+                        if(overlay) overlay.style.display = 'none';
+                        
+                        // Mostramos solo el producto elegido y hacemos scroll
                         mostrarEnContenedor(inventario.filter(prod => prod.nombre === p.nombre), contTodos);
+                        contTodos.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     };
                     cajaSugerencias.appendChild(div);
                 });
@@ -121,26 +120,28 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Eventos de Sombra (Overlay)
         inputBuscador.addEventListener('focus', () => {
+            if(inputBuscador.value.length >= 2) cajaSugerencias.style.display = 'block';
             if(overlay) overlay.style.display = 'block';
         });
 
+        // Cerrar buscador al hacer clic fuera
         document.addEventListener('click', (e) => {
-            if (!inputBuscador.contains(e.target) && (!cajaSugerencias || !cajaSugerencias.contains(e.target))) {
+            if (!inputBuscador.contains(e.target) && !cajaSugerencias.contains(e.target)) {
                 if(overlay) overlay.style.display = 'none';
-                if(cajaSugerencias) cajaSugerencias.style.display = 'none';
+                cajaSugerencias.style.display = 'none';
             }
         });
     }
 
-    // CARRITO
+    // GESTIÓN DEL CARRITO
     document.addEventListener('click', (e) => {
         if (e.target.classList.contains('btn-agregar')) {
             const nombre = e.target.getAttribute('data-nombre');
             const precio = parseFloat(e.target.getAttribute('data-precio'));
             carrito.push({nombre, precio});
             actualizarInterfaz();
+            
             const carritoDiv = document.getElementById('carrito-flotante');
             if (carritoDiv) carritoDiv.style.display = 'block';
         }
@@ -153,9 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
         carrito.forEach((item, index) => {
             total += item.precio;
             const li = document.createElement('li');
-            li.style = "display:flex; justify-content:space-between; padding:10px 0; color:white;";
-            li.innerHTML = `<span>${item.nombre} - ${item.precio.toFixed(2)}€</span>
-                            <button onclick="eliminarDelCarrito(${index})" style="background:none; border:none; color:#ff007f; cursor:pointer; font-weight:bold; font-size:1.2rem;">X</button>`;
+            li.style = "display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #333; color:white;";
+            li.innerHTML = `
+                <span style="font-size:0.85rem;">${item.nombre}</span>
+                <div>
+                    <span style="font-weight:bold; margin-right:10px;">${item.precio.toFixed(2)}€</span>
+                    <button onclick="eliminarDelCarrito(${index})" style="background:none; border:none; color:#ff007f; cursor:pointer; font-weight:bold; font-size:1.1rem;">✕</button>
+                </div>`;
             listaCesta.appendChild(li);
         });
         if(totalPrecio) totalPrecio.innerText = total.toFixed(2);
@@ -167,16 +172,16 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarInterfaz();
     }
 
-    // WHATSAPP
+    // WHATSAPP FINAL
     const btnWhatsApp = document.getElementById('enviar-whatsapp-cesta'); 
     if(btnWhatsApp) { 
         btnWhatsApp.onclick = function() { 
-            if(carrito.length === 0) return alert("Cesta vacia");
-            const tienda = document.getElementById('tienda-select') ? document.getElementById('tienda-select').value : "Tienda";
-            let msg = "Hola Valencia Vapers%0A%0AMI PEDIDO%3A%0A";
-            carrito.forEach(i => { msg += "%2D " + i.nombre + " (" + i.precio.toFixed(2) + " EUR)%0A"; });
-            msg += "%0ATotal%3A " + totalPrecio.innerText + " EUR%0A";
-            msg += "Recogida en%3A " + tienda;
+            if(carrito.length === 0) return alert("Tu cesta está vacía");
+            const tienda = document.getElementById('tienda-select') ? document.getElementById('tienda-select').value : "No especificada";
+            let msg = "*NUEVO PEDIDO - VALENCIA VAPERS*%0A%0A";
+            carrito.forEach(i => { msg += "• " + i.nombre + " (" + i.precio.toFixed(2) + "€)%0A"; });
+            msg += "%0A*Total:* " + totalPrecio.innerText + "€%0A";
+            msg += "*Tienda de recogida:* " + tienda;
             window.open("https://wa.me/34607280031?text=" + msg, "_blank");
         };
     }
@@ -195,4 +200,6 @@ function filtrarPorCategoria(cat) {
     contenedor.scrollIntoView({ behavior: 'smooth' });
 }
 
-function mostrarTodos() { location.reload(); }
+function mostrarTodos() { 
+    location.reload(); 
+}

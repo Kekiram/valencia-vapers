@@ -16,49 +16,63 @@ body {
     color: var(--blanco);
     font-family: 'Montserrat', sans-serif;
     margin: 0;
+    overflow-x: hidden;
+}
+
+/* --- ANIMACIONES RECUPERADAS --- */
+@keyframes parpadeo-neon {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        text-shadow: 0 0 10px var(--primario), 0 0 20px var(--primario);
+        opacity: 1;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+        opacity: 0.8;
+    }
+}
+
+@keyframes pulso-neon {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 0, 127, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 127, 0); }
 }
 
 /* 2. HEADER ESTRUCTURA PROFESIONAL */
 header {
     background: #000000;
     border-bottom: 1px solid var(--primario);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-/* Fila principal del header */
 .header-main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Divide el espacio en 3 partes exactamente iguales */
+    grid-template-columns: 1fr 1fr 1fr; /* 3 Columnas iguales para centro perfecto */
     align-items: center;
-    padding: 20px 40px;
+    padding: 15px 40px;
     background: #000;
 }
 
-/* Tres bloques iguales para que el logo sea el centro real */
-.search-bar-container, 
-.logo-container, 
-.header-icons {
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-/* --- BUSCADOR --- */
+/* --- BUSCADOR IZQUIERDA --- */
 .search-bar-container {
-    justify-self: start; /* Alinea el buscador a la izquierda del primer bloque */
+    justify-self: start;
     position: relative;
     width: 100%;
     max-width: 350px;
 }
 
 #buscador {
-    width: 100%;
+    width: 100%; /* Cambiado de 80% a 100% para llenar su contenedor */
     height: 45px;
-    padding: 0 50px 0 20px;
+    padding: 0 55px 0 20px; /* Un poco más de espacio a la derecha para la lupa */
     border-radius: 50px;
     border: none;
     font-size: 15px;
     outline: none;
-    box-shadow: 0 2px 10px rgba(255, 0, 127, 0.2); /* Sombra rosa sutil */
+    background: white;
+    color: #333;
+    box-shadow: 0 2px 10px rgba(255, 0, 127, 0.2);
 }
 
 .btn-search {
@@ -68,51 +82,104 @@ header {
     transform: translateY(-50%);
     background: none;
     border: none;
-    color: #ff007f;
+    color: var(--primario);
     font-size: 20px;
     cursor: pointer;
 }
 
-.sugerencias-box {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    width: 100%;
-    background: white;
-    border-radius: 10px;
-    display: none;
-    z-index: 1000;
-    max-height: 400px;
-    overflow-y: auto;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+#buscador:focus {
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+    transition: 0.3s;
 }
 
-/* BLOQUE CENTRAL: Logo */
+.sugerencias-box {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%; /* Ahora sí medirá lo mismo que el input */
+    background: #ffffff;
+    border-radius: 0 0 15px 15px; 
+    z-index: 9999;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    display: none;
+    border: 1px solid #eee; /* Un borde sutil para que no se pierda si el fondo es claro */
+    border-top: none;
+}
+
+/* Estilo para cada item de la búsqueda */
+.sugerencia-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    color: #333;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.sugerencia-item span {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.sugerencia-item b {
+    color: var(--primario);
+    margin-left: auto; /* Empuja el precio a la derecha del todo */
+    font-size: 0.9rem;
+}
+
+.sugerencia-item:hover {
+    background-color: #f0f0f0;
+}
+
+.sugerencia-item img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+/* --- LOGO CENTRO --- */
 .logo-container {
-    justify-self: center; /* ESTO centra el logo perfectamente en la pantalla */
+    justify-self: center;
 }
 
 .logo-pro {
-    height: 120px; /* Tamaño más grande para que sea el protagonista */
+    height: 110px;
     width: auto;
+    filter: drop-shadow(0 0 5px rgba(255, 0, 127, 0.3));
+    transition: 0.3s;
 }
 
-/* --- ICONO CARRITO --- */
+.logo-pro:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px var(--primario));
+}
+
+/* --- CESTA DERECHA --- */
 .header-icons {
-    justify-self: end; /* Alinea la cesta a la derecha del último bloque */
+    justify-self: end;
 }
 
 #icono-carrito {
-    background: #ff007f;
-    padding: 12px 20px;
+    background: var(--primario);
+    padding: 12px 25px;
     border-radius: 8px;
     font-weight: 800;
     color: white;
-    text-decoration: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+    transition: 0.3s;
+}
+
+#icono-carrito:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(255, 0, 127, 0.6);
 }
 
 /* 3. NAVEGACIÓN */
@@ -135,35 +202,42 @@ nav.nav-principal ul li a {
     transition: 0.3s;
 }
 
-nav.nav-principal ul li a:hover { color: var(--primario); }
+nav.nav-principal ul li a:hover { 
+    color: var(--primario);
+    text-shadow: 0 0 5px var(--primario);
+}
 
-/* 4. GRID DE CATEGORÍAS */
+/* 4. GRID DE CATEGORÍAS (Organizado) */
 .banner-grid-categorias {
     display: grid;
-    grid-template-columns: 1.5fr 1fr; /* El de "Desechables" ocupa más espacio */
+    grid-template-columns: 1.5fr 1fr;
     gap: 20px;
     max-width: 1300px;
     margin: 30px auto;
+    padding: 0 20px;
 }
 
 .banner-cat {
     position: relative;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.3s;
-    border: 2px solid transparent;
+    transition: 0.4s;
+}
+
+.banner-cat:hover {
+    transform: scale(1.02);
 }
 
 .banner-grande {
-    height: 300px;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('img/banner-desechables.jpg');
+    height: 400px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('img/banner-desechables.jpg');
     background-size: cover;
+    background-position: center;
     border: 2px solid var(--primario);
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
 }
 
 .banner-peques {
@@ -173,104 +247,124 @@ nav.nav-principal ul li a:hover { color: var(--primario); }
 }
 
 .peqe {
-    height: 142px;
+    height: 192px;
     background: linear-gradient(45deg, #1a1a1a, #000);
     border: 1px solid rgba(255, 0, 127, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .banner-cat h3 {
     font-family: 'Orbitron', sans-serif;
     color: #fff;
-    text-shadow: 0 0 10px var(--primario);
+    margin: 0;
+    animation: parpadeo-neon 4s infinite;
 }
 
-/* 5. PRODUCTOS */
+/* 5. PRODUCTOS (Efecto Tarjeta Recuperado) */
 .productos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 40px 20px;
 }
 
 .tarjeta-vaper {
     background: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 15px;
+    padding: 25px;
     text-align: center;
-    transition: 0.3s;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
+    border: 1px solid transparent;
 }
 
-.tarjeta-vaper img { width: 100%; height: 180px; object-fit: contain; }
+.tarjeta-vaper:hover {
+    transform: translateY(-15px);
+    border-color: var(--primario);
+    box-shadow: 0 15px 35px rgba(255, 0, 127, 0.2);
+}
 
-.tarjeta-vaper h3 { color: #222; font-size: 1rem; margin: 15px 0; }
+.tarjeta-vaper img { 
+    width: 100%; 
+    height: 200px; 
+    object-fit: contain;
+    transition: 0.3s;
+}
 
-.tarjeta-vaper p { color: var(--primario); font-size: 1.4rem; font-weight: 800; }
+.tarjeta-vaper:hover img {
+    transform: scale(1.1);
+}
+
+.tarjeta-vaper h3 { color: #222; font-size: 1.1rem; margin: 15px 0; font-weight: 700; }
+.tarjeta-vaper p { color: var(--primario); font-size: 1.5rem; font-weight: 800; margin: 10px 0; }
 
 .btn-agregar {
-    background: #222;
+    background: #121212;
     color: white;
     width: 100%;
     padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
+    transition: 0.3s;
 }
 
-.tarjeta-vaper:hover .btn-agregar { background: var(--primario); }
+.tarjeta-vaper:hover .btn-agregar { 
+    background: var(--primario);
+    box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4);
+}
 
-/* 6. CARRITO FLOTANTE Y OVERLAYS */
+/* 6. BOTONES ESPECÍFICOS */
+.btn-comprar {
+    background-color: var(--primario);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-weight: 800;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+    transition: 0.3s;
+}
+
+.btn-comprar:hover {
+    background-color: white;
+    color: var(--primario);
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+
+/* 7. CARRITO Y MODALES */
 #carrito-flotante {
     position: fixed;
     top: 100px;
     right: 30px;
-    width: 320px;
+    width: 350px;
     background: #1a1a1a;
-    border: 1px solid var(--primario);
-    padding: 20px;
-    border-radius: 8px;
+    border: 2px solid var(--primario);
+    padding: 25px;
+    border-radius: 12px;
     z-index: 2000;
     display: none;
-}
-
-.overlay-oscuro {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 900;
-    display: none;
-    backdrop-filter: blur(4px);
-}
-
-/* 7. WHATSAPP Y MODAL */
-.whatsapp-float {
-    position: fixed;
-    bottom: 25px; left: 25px;
-    background: var(--verde-wa);
-    width: 60px; height: 60px;
-    border-radius: 50%;
-    display: flex; justify-content: center; align-items: center;
-    z-index: 1000;
+    box-shadow: -10px 10px 30px rgba(0,0,0,0.8);
 }
 
 #enviar-whatsapp-cesta {
     width: 100%;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: var(--blanco);
+    color: #000;
     border: none;
-    padding: 12px;
+    padding: 15px;
     font-weight: 800;
-    font-size: 14px;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 15px;
+    margin-top: 20px;
     transition: 0.3s;
 }
 
@@ -279,80 +373,64 @@ nav.nav-principal ul li a:hover { color: var(--primario); }
     color: white;
 }
 
-/* EDAD */
+/* MODAL EDAD (Efecto Glass) */
 .modal-edad {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.85);
     display: flex; align-items: center; justify-content: center;
     z-index: 10000;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
 }
 
 .contenido-edad {
     background: #0a0a0a;
-    padding: 40px;
-    border-radius: 20px;
+    padding: 50px;
+    border-radius: 25px;
     border: 2px solid var(--primario);
     text-align: center;
-}
-
-.botones-edad {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 25px;
+    animation: pulso-neon 2s infinite;
 }
 
 .btn-confirmar {
-    background-color: var(--primario);
+    background: var(--primario);
     color: white;
     border: none;
-    padding: 15px 30px;
-    font-weight: bold;
+    padding: 15px 40px;
+    font-weight: 800;
     border-radius: 50px;
     cursor: pointer;
-    font-size: 1rem;
+    box-shadow: 0 0 20px var(--primario);
 }
 
 .btn-salir {
     background: transparent;
     color: #888;
     border: 1px solid #444;
-    padding: 15px 30px;
-    font-weight: bold;
+    padding: 15px 40px;
     border-radius: 50px;
+    margin-left: 15px;
     cursor: pointer;
 }
 
-.btn-confirmar:hover {
-    box-shadow: 0 0 20px var(--primario);
+/* 8. WHATSAPP FLOAT */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px; left: 30px;
+    background: var(--verde-wa);
+    width: 65px; height: 65px;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
 }
 
-/* botones comprar */
-.btn-comprar {
-    background-color: var(--primario); /* El rosa neón */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
-}
+.whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
 
-.btn-comprar:hover {
-    background-color: #ff3399;
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255, 0, 127, 0.8);
-}
-
-/* 8. RESPONSIVE */
-@media (max-width: 768px) {
-    .header-main { flex-direction: column; gap: 15px; }
+/* 9. RESPONSIVE */
+@media (max-width: 992px) {
+    .header-main { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
+    .search-bar-container, .logo-container, .header-icons { justify-self: center; text-align: center; }
     .banner-grid-categorias { grid-template-columns: 1fr; }
-    .productos { grid-template-columns: 1fr 1fr; }
 }
