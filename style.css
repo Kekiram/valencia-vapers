@@ -63,7 +63,7 @@ header {
 }
 
 #buscador {
-    width: 100%; /* Cambiado de 80% a 100% para llenar su contenedor */
+    width: 80%; /* Cambiado de 80% a 100% para llenar su contenedor */
     height: 45px;
     padding: 0 55px 0 20px; /* Un poco más de espacio a la derecha para la lupa */
     border-radius: 50px;
@@ -372,7 +372,20 @@ nav.nav-principal ul li a:hover {
     z-index: 2000;
     display: none;
     box-shadow: -10px 10px 30px rgba(0,0,0,0.8);
+    transition: opacity 0.3s ease; /* Para que aparezca suave */
 }
+
+/* Estilo para la lista interna (evita que se estire infinito) */
+#lista-cesta {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+    padding-right: 5px;
+}
+
+/* Personalizar la barra de scroll del carrito */
+#lista-cesta::-webkit-scrollbar { width: 5px; }
+#lista-cesta::-webkit-scrollbar-thumb { background: var(--primario); border-radius: 10px; }
 
 #enviar-whatsapp-cesta {
     width: 100%;
@@ -448,16 +461,112 @@ nav.nav-principal ul li a:hover {
 .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
 
 /* 9. RESPONSIVE */
+/* Tablet y Escritorio pequeño */
 @media (max-width: 992px) {
     .header-main { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
     .search-bar-container, .logo-container, .header-icons { justify-self: center; text-align: center; }
     .banner-grid-categorias { grid-template-columns: 1fr; }
 }
 
-header {
-    z-index: 1001; /* Un punto por encima del overlay (900) */
+/* --- MÓVILES (Pantallas menores a 768px) --- */
+@media (max-width: 768px) {
+
+    /* 1. Header Compacto */
+    .header-main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 15px 20px;
+        gap: 12px;
+    }
+
+    .logo-container { order: 1; }
+    .logo-pro { max-width: 140px; height: auto; }
+
+    .search-bar-container { 
+        order: 2; 
+        width: 100%; 
+        max-width: 300px; /* Tamaño elegante para móvil */
+    }
+
+    #buscador { width: 100%; font-size: 14px; padding: 10px 15px; }
+
+    .header-icons { order: 3; width: auto; }
+
+    #icono-carrito {
+        min-width: 140px;
+        padding: 8px 20px;
+        border-radius: 50px;
+        justify-content: center;
+        font-size: 0.85rem;
+    }
+
+    /* 2. Buscador y Sugerencias */
+    .sugerencias-box {
+        width: 100%;
+        left: 0;
+        background: #ffffff; /* O #111 si prefieres modo oscuro */
+        border: 1px solid var(--primario);
+        z-index: 2000;
+    }
+
+    /* 3. Menú de Navegación (Scroll Horizontal) */
+    nav.nav-principal ul {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding: 12px 20px;
+        gap: 20px;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
+    }
+
+    /* 4. Carrito Flotante Móvil (Sobrescribe al de arriba) */
+    #carrito-flotante {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        right: auto !important; /* IMPORTANTE: Anula el right: 30px */
+        transform: translate(-50%, -50%) !important;
+        width: 90% !important;
+        max-width: 340px;
+        max-height: 85vh;
+        padding: 20px;
+    }
+
+    /* 5. Estructura de Banners y Productos */
+    .banner-grid-categorias {
+        grid-template-columns: 1fr;
+        padding: 10px;
+        margin: 10px auto;
+    }
+
+    .banner-grande { height: 220px; padding: 20px; }
+    
+    .banner-peques {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .peqe { height: 140px; }
+    .peqe h3 { font-size: 0.8rem; text-align: center; }
+
+    .productos {
+        grid-template-columns: repeat(2, 1fr); /* 2 por fila */
+        gap: 12px;
+        padding: 15px;
+    }
+
+    .tarjeta-vaper { padding: 15px; }
+    .tarjeta-vaper img { height: 130px; }
+    .tarjeta-vaper h3 { font-size: 0.9rem; }
+    .tarjeta-vaper p { font-size: 1.1rem; }
+
+    /* 6. Mapas y Footer */
+    .contenedor-mapas { grid-template-columns: 1fr; }
 }
 
-.search-bar-container {
-    z-index: 1002; /* Para que las sugerencias siempre se vean */
+/* Móviles muy pequeños */
+@media (max-width: 480px) {
+    .productos { grid-template-columns: 1fr; } /* 1 por fila para verlos grandes */
+    .banner-peques { grid-template-columns: 1fr; }
 }

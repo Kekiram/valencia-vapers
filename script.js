@@ -129,7 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         cajaSugerencias.appendChild(div);
                     });
                     cajaSugerencias.style.display = 'block';
-                } else {
+                }
+                
+                
+                else {
                     cajaSugerencias.style.display = 'none';
                 }
 
@@ -190,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarInterfaz();
     }
 
-    // WHATSAPP FINAL
+// WHATSAPP FINAL
     const btnWhatsApp = document.getElementById('enviar-whatsapp-cesta'); 
     if(btnWhatsApp) { 
         btnWhatsApp.onclick = function() { 
@@ -204,9 +207,28 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
-    inicializarTienda();
-});
+    // --- NUEVA FUNCIÓN: CERRAR CARRITO AL HACER CLIC FUERA ---
+    document.addEventListener('click', (e) => {
+        const carritoDiv = document.getElementById('carrito-flotante');
+        const botonCesta = document.getElementById('icono-carrito');
+        
+        // Verificamos si el carrito está abierto
+        if (carritoDiv && carritoDiv.style.display === 'block') {
+            // Si el clic NO es dentro del carrito Y NO es en el botón de abrir (icono-carrito)
+            // Y tampoco es en un botón de "Añadir al carrito" (porque si no, se cerraría al añadir uno nuevo)
+            if (!carritoDiv.contains(e.target) && 
+                !botonCesta.contains(e.target) && 
+                !e.target.classList.contains('btn-agregar')) {
+                
+                carritoDiv.style.display = 'none';
+            }
+        }
+    });
 
+    inicializarTienda();
+}); // Aquí termina el DOMContentLoaded
+
+// Estas quedan fuera porque son funciones globales que usas en el HTML (onclick)
 function filtrarPorCategoria(cat) {
     if (typeof inventario === 'undefined') return;
     const filtrados = inventario.filter(p => p.categoria.toLowerCase() === cat.toLowerCase());
