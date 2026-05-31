@@ -25,8 +25,8 @@ function toggleCarrito() {
 
 let carrito = [];
 
-function setProductCardHTML(tarjeta, producto) {
-    tarjeta.innerHTML = `
+function setProductCardHTML(producto) {
+    return  `
         <span class="etiqueta-categoria">${producto.categoria || 'Vaper'}</span>
         <img src="${producto.img}" alt="${producto.nombre}">
         <h3>${producto.nombre}</h3>
@@ -41,10 +41,9 @@ window.mostrarEnContenedor = function(productosAMostrar, contenedor) {
     if (!contenedor) return;
     contenedor.innerHTML = '';
     productosAMostrar.forEach(producto => {
-        const tarjeta = document.createElement('div');
+        let tarjeta = document.createElement('div');
         tarjeta.classList.add('tarjeta-vaper');
-        
-        setProductCardHTML(tarjeta, producto);
+        tarjeta.innerHTML = setProductCardHTML(producto);
         contenedor.appendChild(tarjeta);
     });
 }
