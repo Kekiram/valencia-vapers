@@ -25,6 +25,18 @@ function toggleCarrito() {
 
 let carrito = [];
 
+function setProductCardHTML(tarjeta, producto) {
+    tarjeta.innerHTML = `
+        <span class="etiqueta-categoria">${producto.categoria || 'Vaper'}</span>
+        <img src="${producto.img}" alt="${producto.nombre}">
+        <h3>${producto.nombre}</h3>
+        <p>${producto.precio.toFixed(2)}€</p>
+        <button class="btn-agregar" data-nombre="${producto.nombre}" data-precio="${producto.precio}">
+            Añadir al carrito
+        </button>
+    `;
+}
+
 window.mostrarEnContenedor = function(productosAMostrar, contenedor) {
     if (!contenedor) return;
     contenedor.innerHTML = '';
@@ -32,15 +44,7 @@ window.mostrarEnContenedor = function(productosAMostrar, contenedor) {
         const tarjeta = document.createElement('div');
         tarjeta.classList.add('tarjeta-vaper');
         
-        tarjeta.innerHTML = `
-            <span class="etiqueta-categoria">${producto.categoria || 'Vaper'}</span>
-            <img src="${producto.img}" alt="${producto.nombre}">
-            <h3>${producto.nombre}</h3>
-            <p>${producto.precio.toFixed(2)}€</p>
-            <button class="btn-agregar" data-nombre="${producto.nombre}" data-precio="${producto.precio}">
-                Añadir al carrito
-            </button>
-        `;
+        setProductCardHTML(tarjeta, producto);
         contenedor.appendChild(tarjeta);
     });
 }
