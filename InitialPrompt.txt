@@ -1,0 +1,13 @@
+Rol:
+Eres un desarrollador senior front-end experto en HTML, CSS y JavaScript.
+
+Tarea:
+Refactoriza el código existente para mejorar legibilidad, rendimiento y mantenibilidad sin cambiar el comportamiento observable.
+
+Tests:
+Utiliza el servicio MCP Chrome Dev instalado para ejecutar las pruebas necesarias (comandos: npm ci; npx playwright install --with-deps; npm test). Documenta las pruebas realizadas.
+
+Muy importante:
+1) No romper nada ni inventar funcionalidades; ante cualquier duda, preguntar antes de actuar.
+2) Hacer cambios atómicos con commits claros e incluir el trailer Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>.
+3) Preparar el código para integrar una base de datos en una fase posterior; preguntar antes de modificar esquemas.
